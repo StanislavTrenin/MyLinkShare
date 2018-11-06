@@ -1,5 +1,5 @@
 <?php
-require("../Config/db.php");
-require("../Core/Model.php");
-require("../Core/Controller.php");
+require_once("../Config/db.php");
+require_once("../Models/Model.php");
+require_once("../Controllers/Controller.php");
 ?>

@@ -1,4 +1,4 @@
-<?
+<?php
 class Controller
 {
     var $vars = [];
@@ -7,22 +7,29 @@ class Controller
     {
         $this->vars = array_merge($this->vars, $d);
     }
-    /*function render($filename)
+    function render($filename)
     {
         echo"HERE!!!!!!!!!!!!!!!!!! !!!!!!!!!!!!!!!1 !!!!!!!!!!!!";
         extract($this->vars);
-        ob_start();
-        require("../Views/" . ucfirst(str_replace('Controller', '', get_class($this))) . '/' . $filename . '.php');
+        echo "lol";
+        //ob_start("../Views/" . ucfirst(str_replace('Controller', '', get_class($this))) . '/' . $filename . '.php');
+        echo "";
+
+        require ('../Views/Tasks/index.php');
         $content_for_layout = ob_get_clean();
+        echo "lol";
         if ($this->layout == false)
         {
+            echo "Here!!!";
             $content_for_layout;
         }
         else
         {
-            require("../Views/Layouts/" . $this->layout . '.php');
+            echo "There am I!!! + $this->layout";
+
+            require('../Views/Layout/default.php');
         }
-    }*/
+    }
     private function secure_input($data)
     {
         $data = trim($data);

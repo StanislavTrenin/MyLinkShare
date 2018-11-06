@@ -4,9 +4,11 @@ class Router
     static public function parse($url, $request)
     {
         $url = trim($url);
-        if ($url == "/testlinkshare.com/")
+        echo"url = $url";
+        if ($url == "/index.php")
         {
-            $request->controller = "tasks";
+            echo"There!!!";
+            $request->controller = "user";
             $request->action = "index";
             $request->params = [];
         }
