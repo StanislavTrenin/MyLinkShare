@@ -3,33 +3,35 @@ class Controller
 {
     var $vars = [];
     var $layout = "default";
+
     function set($d)
     {
         $this->vars = array_merge($this->vars, $d);
     }
+
     function render($filename)
     {
-        echo"HERE!!!!!!!!!!!!!!!!!! !!!!!!!!!!!!!!!1 !!!!!!!!!!!!";
+        //echo"HERE!!!!!!!!!!!!!!!!!! !!!!!!!!!!!!!!!1 !!!!!!!!!!!!";
         extract($this->vars);
-        echo "lol";
+        //echo "lol";
         //ob_start("../Views/" . ucfirst(str_replace('Controller', '', get_class($this))) . '/' . $filename . '.php');
-        echo "";
 
-        require ('../Views/Tasks/index.php');
+        require('../Views/Layout/default.php');
         $content_for_layout = ob_get_clean();
-        echo "lol";
+        //echo "lol";
         if ($this->layout == false)
         {
-            echo "Here!!!";
+            //echo "Here!!!";
             $content_for_layout;
         }
         else
         {
-            echo "There am I!!! + $this->layout";
+            echo "There am I!!! + $filename";
 
-            require('../Views/Layout/default.php');
+            require('../Views/User/' . $filename . '.php');
         }
     }
+
     private function secure_input($data)
     {
         $data = trim($data);
@@ -37,6 +39,7 @@ class Controller
         $data = htmlspecialchars($data);
         return $data;
     }
+
     protected function secure_form($form)
     {
         foreach ($form as $key => $value)

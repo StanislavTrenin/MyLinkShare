@@ -3,14 +3,33 @@ class userController extends Controller
 {
     function index()
     {
-        echo " in controll 1";
+        echo"Why there!!!";
         require_once('../Models/User.php');
-        echo " in controll 2";
         $tasks = new User();
-        echo " in controll 3";
         $d['tasks'] = $tasks->showAllTasks();
         $this->set($d);
         $this->render("index");
+    }
+
+    function create() {
+
+        if (isset($_POST["login"])) {
+            require('../Models/User.php');
+            $task = new User();
+            $task->create1($_POST["login"], $_POST["mail"]);
+        }
+        $this->render("tmp");
+    }
+
+    function create1()
+    {
+        if (isset($_POST["title"])) {
+            require('../Models/User.php');
+            $task= new User();
+            $task->create1($_POST["title"], $_POST["description"]);
+
+        }
+        $this->render("create");
     }
 }
 ?>

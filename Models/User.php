@@ -1,16 +1,18 @@
 <?php
 class User extends Model
 {
-    public function create($title, $description)
+    public function create($login, $mail)
     {
-        /*$sql = "INSERT INTO tasks (title, description, created_at, updated_at) VALUES (:title, :description, :created_at, :updated_at)";
+        $sql = "INSERT INTO users (login, mail) VALUES (?, ?)";
         $req = Database::getBdd()->prepare($sql);
-        return $req->execute([
-            'title' => $title,
-            'description' => $description,
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s')
-        ]);*/
+        return $req->execute([$login, $mail]);
+    }
+
+    public function create1($title, $description)
+    {
+        $sql = "INSERT INTO tasks (title, description, created_at, updated_at) VALUES (?, ?, ?, ?)";
+        $req = Database::getBdd()->prepare($sql);
+        return $req->execute([$title, $description, date('Y-m-d H:i:s'), date('Y-m-d H:i:s')]);
     }
 
     public function showTask($id)
@@ -23,10 +25,10 @@ class User extends Model
 
     public function showAllTasks()
     {
-        $sql = "SELECT * FROM tasks";
+        /*$sql = "SELECT * FROM tasks";
         $req = Database::getBdd()->prepare($sql);
         $req->execute();
-        return $req->fetchAll();
+        return $req->fetchAll();*/
     }
 
     public function edit($id, $title, $description)

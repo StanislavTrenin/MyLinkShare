@@ -8,25 +8,24 @@ class Dispatcher
 {
 
     private $request;
+
     public function dispatch()
     {
-        echo "Here!!!";
         $this->request = new Request();
         Router::parse($this->request->url, $this->request);
+        //echo"$this->request->action";
         $controller = $this->loadController();
-        echo "There";
-        //echo "lol $this->request->action";
-        call_user_func_array([$controller, 'index'], []);
+        //echo"$this->request->action";
+        call_user_func_array([$controller, $this->request->action], []);
     }
+
     public function loadController()
     {
         $name = $this->request->controller . "Controller";
         $file = 'Controllers/' . $name . '.php';
-        echo"file = $file!!! name = $name!!! ";
+        //echo " name = $name file = $file";
         require_once($file);
-        echo"end1";
         $controller = new $name();
-        echo"end2";
         return $controller;
 
 
