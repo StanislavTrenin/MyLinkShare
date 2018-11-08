@@ -2,7 +2,7 @@
 class Controller
 {
     var $vars = [];
-    var $layout = "default";
+    var $layout = 'default';
 
     function set($d)
     {
@@ -11,24 +11,21 @@ class Controller
 
     function render($filename)
     {
-        //echo"HERE!!!!!!!!!!!!!!!!!! !!!!!!!!!!!!!!!1 !!!!!!!!!!!!";
         extract($this->vars);
-        //echo "lol";
-        //ob_start("../Views/" . ucfirst(str_replace('Controller', '', get_class($this))) . '/' . $filename . '.php');
 
-        require('../Views/Layout/default.php');
+        //require_once('../Views/Layout/default.php');
         $content_for_layout = ob_get_clean();
-        //echo "lol";
+
         if ($this->layout == false)
         {
-            //echo "Here!!!";
             $content_for_layout;
         }
         else
         {
-            echo "There am I!!! + $filename";
 
-            require('../Views/User/' . $filename . '.php');
+            require_once('../Views/Layout/default.php');
+            require_once('../Views/User/' . $filename . '.php');
+
         }
     }
 

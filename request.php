@@ -8,7 +8,7 @@ class Request
 
     public function __construct()
     {
-        $this->url = $_SERVER["REQUEST_URI"];
+        $this->url = $_SERVER['REQUEST_URI'];
     }
 }
 ?>

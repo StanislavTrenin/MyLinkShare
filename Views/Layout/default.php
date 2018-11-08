@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <html>
 <head>
     <meta charset="utf-8">
@@ -7,7 +8,7 @@
 
     <style>
         body {
-            padding-top: 5rem;
+            padding-top: 1rem;
         }
         .starter-template {
             padding: 3rem 1.5rem;

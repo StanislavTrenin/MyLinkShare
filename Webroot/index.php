@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once('../Config/core.php');
 require_once('../router.php');
 require_once('../request.php');
