@@ -7,7 +7,7 @@ class userController extends Controller
         $tasks = new User();
         $d['tasks'] = $tasks->showAllTasks();
         $this->set($d);
-        $this->render('index');
+        $this->render('User/index');
     }
 
     function create() {
@@ -18,7 +18,7 @@ class userController extends Controller
             $task->create($_POST['login'], $_POST['mail'], $_POST['password']
                 , $_POST['confirm'], $_POST['first_name'], $_POST['second_name']);
         }
-        $this->render('create');
+        $this->render('User/create');
     }
 
     function login() {
@@ -28,7 +28,7 @@ class userController extends Controller
             $task = new User();
             $task->login($_POST['login'], $_POST['password']);
         }
-        $this->render('login');
+        $this->render('User/login');
     }
 
     function logout() {
@@ -38,7 +38,7 @@ class userController extends Controller
             $task = new User();
             $task->logout();
         }
-        $this->render('index');
+        $this->render('User/index');
     }
 
     /*function create1()

@@ -24,7 +24,7 @@ class Controller
         {
 
             require_once('../Views/Layout/default.php');
-            require_once('../Views/User/' . $filename . '.php');
+            require_once('../Views/' . $filename . '.php');
 
         }
     }

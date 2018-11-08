@@ -1,7 +1,19 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: stanislav
- * Date: 08.11.18
- * Time: 15:27
- */
+<div align = "center">
+    <div style = "width:600px; border: solid 1px #333333; " align = "left">
+        <div style = "background-color:#333333; color:#FFFFFF; padding:3px;"><b>Create new link</b></div>
+
+        <div style = "margin:60px">
+
+            <form action = "" method = "post">
+                <label>Title  :</label><input type = "text" name = "title" class = "box" required/><br /><br />
+                <label>Description :</label><p><textarea rows="10" cols="60" name="description" required></textarea></p><br /><br />
+                <label>Link :</label><input type = "text" name = "link" class = "box" required/><br/><br />
+
+                <input type = "submit" name = "submit" value = " Create "/>
+            </form>
+                    </div>
+
+    </div>
+
+</div>
+<h2><a href = "http://testlinkshare.com/link/view/">Go back</a></h2>

@@ -10,6 +10,7 @@ class User extends Model
 
     public function create($login, $mail, $password, $confirm, $first_name, $second_name)
     {
+
         $newpassword = MD5($password.$login.SECRET);
         $password_ok = false;
 
@@ -31,12 +32,13 @@ class User extends Model
 
         if(!$user_exist) {
 
-            if($password_ok){
-            $sql = 'INSERT INTO users (login, mail, password, first_name,
+            if($password_ok) {
+                $sql = 'INSERT INTO users (login, mail, password, first_name,
  second_name, active) VALUES (?, ?, ?, ?, ?, ?)';
-            $req = Database::getBdd()->prepare($sql);
-            return $req->execute([$login, $mail, $newpassword,
-                $first_name, $second_name, 0]);}
+                $req = Database::getBdd()->prepare($sql);
+                $req->execute([$login, $mail, $newpassword, $first_name, $second_name, 0]);
+                //header('location: http://testlinkshare.com/user/index/');
+            }
                 else {
                     $_SESSION['error'] = 'Fail to confirm password!!!';
                 }
