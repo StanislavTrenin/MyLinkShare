@@ -3,7 +3,7 @@ class userController extends Controller
 {
     function index()
     {
-        require_once('../Models/User.php');
+        //require_once('../Models/User.php');
         $tasks = new User();
         $d['tasks'] = $tasks->showAllTasks();
         $this->set($d);
@@ -13,7 +13,7 @@ class userController extends Controller
     function create() {
 
         if (isset($_POST['submit'])) {
-            require_once('../Models/User.php');
+            //require_once('../Models/User.php');
             $task = new User();
             $task->create($_POST['login'], $_POST['mail'], $_POST['password']
                 , $_POST['confirm'], $_POST['first_name'], $_POST['second_name']);
@@ -24,7 +24,7 @@ class userController extends Controller
     function login() {
 
         if (isset($_POST['submit'])){
-            require_once('../Models/User.php');
+            //require_once('../Models/User.php');
             $task = new User();
             $task->login($_POST['login'], $_POST['password']);
         }
@@ -34,7 +34,7 @@ class userController extends Controller
     function logout() {
 
         if (isset($_POST['submit'])){
-            require_once('../Models/User.php');
+            //require_once('../Models/User.php');
             $task = new User();
             $task->logout();
         }

@@ -20,6 +20,11 @@
     <form action = "http://testlinkshare.com/link/view/" method = "post">
         <input type = "submit" name = "submit" value = "View links"/>
     </form>
+
+    <form action = "http://testlinkshare.com/link/viewMy/" method = "post">
+        <input type = "submit" name = "submit" value = "View my links"/>
+    </form>
+
     <?php if (isset($_SESSION['user_login'])):  ?>
         <form action = "http://testlinkshare.com/user/logout/" method = "post">
             <input type = "submit" name = "submit" value = "Log out "/>
