@@ -13,7 +13,7 @@
     <label>First name  :</label><input type = "text" name = "first_name" class = "box" required/><br/><br />
     <label>Second name  :</label><input type = "text" name = "second_name" class = "box" required/><br/><br />
 
-    <input type = "submit" name = "submit" value = " Submit "/>
+    <input type = "submit" name = "create" value = " Submit "/>
 </form>
 <?php if (isset($_SESSION['error'])):  ?>
     <div style = "font-size:11px; color:#cc0000; margin-top:10px">

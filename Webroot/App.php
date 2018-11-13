@@ -2,6 +2,7 @@
 class App
 {
 
+
     public function boot() {
         session_start();
 
@@ -17,7 +18,7 @@ class App
         //if(file_exists('../Controllers/userController.php')) {echo' ew? ';}
         //if(file_exists($file)) {echo' ew? ';}
         $controller = new $name();
-        echo $file.' '.$name;
+        //echo $file.' '.$name;
 
         return $controller;
     }
@@ -36,9 +37,9 @@ class App
         echo $file.' '.$name.' '.$controller.' '.$action;
         require_once($file);
         $controller = new $name();*/
-        echo'here ';
+        //echo'here ';
         $controller = $this->makeController($controller_name);
-        echo' here';
+        //echo' here';
 
         call_user_func_array([$controller, $action_name], []);
 

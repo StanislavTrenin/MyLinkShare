@@ -21,8 +21,8 @@
         <input type = "submit" name = "submit" value = "View links"/>
     </form>
 
-    <form action = "http://testlinkshare.com/link/viewMy/" method = "post">
-        <input type = "submit" name = "submit" value = "View my links"/>
+    <form action = "http://testlinkshare.com/link/viewOwn/" method = "post">
+        <input type = "submit" name = "submit" value = "View own links"/>
     </form>
 
     <?php if (isset($_SESSION['user_login'])):  ?>

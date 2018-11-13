@@ -3,6 +3,7 @@
         <div style = "background-color:#333333; color:#FFFFFF; padding:3px;"><b>View links</b></div>
 
         <div style = "margin:30px">
+
             <?php if (isset($_SESSION['user_login'])):  ?>
 
                 <h2><div><?php echo 'Hello '.$_SESSION['user_login'].'!'; ?></div></h2>
@@ -19,11 +20,14 @@
                     <?php echo $link['link']?><br/>
 
                     <?php if ($_SESSION['user_id'] == $link['author_id']): ?>
-                        <h3><a href = "http://testlinkshare.com/link/edit/">Edit</a></h3>
+                        <h3><a href = "http://testlinkshare.com/link/edit">Edit</a></h3>
                     <?php endif; ?><br/>
 
                 <?php endforeach; ?>
+                <?php unset($_SESSION['links']); ?>
             <?php endif; ?>
+
+
         </div>
 
     </div>

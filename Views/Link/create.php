@@ -8,6 +8,7 @@
                 <label>Title  :</label><input type = "text" name = "title" class = "box" required/><br /><br />
                 <label>Description :</label><p><textarea rows="10" cols="60" name="description" required></textarea></p><br /><br />
                 <label>Link :</label><input type = "text" name = "link" class = "box" required/><br/><br />
+                <label>Private :</label><input type="checkbox" name="private" value="No" /><br/><br />
 
                 <input type = "submit" name = "create" value = " Create "/>
             </form>

@@ -6,16 +6,17 @@ class linkController extends Controller
         //require_once('../Models/Link.php');
         $task = new Link();
         $task->view();
-        $this->render('Link/view');
+        $this->render('Link/viewMy');
+        $view = new View('../Views/Link/viewMy', array('links' =>
+            array("title" => "Article", "body" => "Lorem Ipsum")));
 
     }
 
-    function viewMy() {
-
+    function viewOwn() {
         //require_once('../Models/Link.php');
         $task = new Link();
-        $task->view();
-        $this->render('Link/viewMy');
+        $task->viewOwn($_SESSION['user_id']);
+        $this->render('Link/view');
 
     }
 

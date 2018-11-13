@@ -4,6 +4,7 @@
 
         <div style = "margin:60px">
 
+            <?php echo'id = '.$_GET['id']; ?><br/>
             <form action = "" method = "post">
                 <label>Title  :</label><input type = "text" name = "title" class = "box" required/><br /><br />
                 <label>Description :</label><p><textarea rows="10" cols="60" name="description" required></textarea></p><br /><br />

@@ -11,6 +11,7 @@ class Controller
 
     function render($filename)
     {
+
         extract($this->vars);
 
         //require_once('../Views/Layout/default.php');

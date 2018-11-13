@@ -12,7 +12,7 @@ class userController extends Controller
 
     function create() {
 
-        if (isset($_POST['submit'])) {
+        if (isset($_POST['create'])) {
             //require_once('../Models/User.php');
             $task = new User();
             $task->create($_POST['login'], $_POST['mail'], $_POST['password']
