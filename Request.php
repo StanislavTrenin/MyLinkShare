@@ -1,11 +1,11 @@
 <?php
 class Request
 {
-    public $url;
+    public $uri;
 
     public function __construct()
     {
-        $this->url = $_SERVER['REQUEST_URI'];
+        $this->uri = $_SERVER['REQUEST_URI'];
     }
 }
 ?>

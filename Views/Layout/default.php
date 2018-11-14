@@ -24,9 +24,7 @@
 
     <div class="starter-template">
 
-        <?php
-        echo $content_for_layout;
-        ?>
+
 
     </div>
 

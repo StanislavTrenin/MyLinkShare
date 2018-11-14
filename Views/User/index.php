@@ -8,31 +8,34 @@
                 <h2><div><?php echo 'Hello '.$_SESSION['user_login'].'!'; ?></div></h2>
             <?php endif; ?>
 
-<div class="row col-md-12 centered">
-    <form action = "http://testlinkshare.com/user/create/" method = "post">
-        <input type = "submit" name = "submit" value = " Create new user "/>
-    </form>
+            <div class="row col-md-12 centered">
+                <form action = "http://testlinkshare.com/user/create/" method = "post">
+                    <input type = "submit" name = "create" value = " Create new user "/>
+                </form>
 
-    <form action = "http://testlinkshare.com/user/login/" method = "post">
-        <input type = "submit" name = "login" value = "Log in"/>
-    </form>
+                <?php if (!isset($_SESSION['user_login'])):  ?>
+                    <form action = "http://testlinkshare.com/user/login/" method = "post">
+                        <input type = "submit" name = "login" value = "Log in"/>
+                    </form>
+                <?php endif; ?>
 
-    <form action = "http://testlinkshare.com/link/view/" method = "post">
-        <input type = "submit" name = "submit" value = "View links"/>
-    </form>
+                <form action = "http://testlinkshare.com/link/view/" method = "post">
+                    <input type = "submit" name = "view" value = "View links"/>
+                </form>
 
-    <form action = "http://testlinkshare.com/link/viewOwn/" method = "post">
-        <input type = "submit" name = "submit" value = "View own links"/>
-    </form>
+                <form action = "http://testlinkshare.com/link/viewOwn/" method = "post">
+                    <input type = "submit" name = "viewOwn" value = "View own links"/>
+                </form>
 
-    <?php if (isset($_SESSION['user_login'])):  ?>
-        <form action = "http://testlinkshare.com/user/logout/" method = "post">
-            <input type = "submit" name = "submit" value = "Log out "/>
-        </form>
-    <?php endif; ?>
-</div>
+                <?php if (isset($_SESSION['user_login'])):  ?>
+                    <form action = "http://testlinkshare.com/user/logout/" method = "post">
+                        <input type = "submit" name = "logout" value = "Log out "/>
+                    </form>
+                <?php endif; ?>
+            </div>
         </div>
 
     </div>
 
 </div>
+

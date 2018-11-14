@@ -8,13 +8,13 @@
 
                 <h2><div><?php echo 'Hello '.$_SESSION['user_login'].'!'; ?></div></h2>
 
-            <form action = "http://testlinkshare.com/link/create/" method = "post">
-                <input type = "submit" name = "submit" value = " Create new link "/>
-            </form>
+                <form action = "http://testlinkshare.com/link/create/" method = "post">
+                    <input type = "submit" name = "submit" value = " Create new link "/>
+                </form>
             <?php endif; ?>
 
-            <?php if (isset($_SESSION['links'])): ?>
-                <?php foreach($_SESSION['links'] as $link):?>
+            <?php if (isset($links)): ?>
+                <?php foreach($links as $link):?>
                     <b><?php echo $link['title']?></b><br/>
                     <?php echo substr($link['description'], 0, 50)?><br/>
                     <?php echo $link['link']?><br/>

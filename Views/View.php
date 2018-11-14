@@ -8,6 +8,8 @@ class View
     {
         $this->path = $path;
         $this->data = $data;
+        /*if(empty($data)) { echo 'lol'; }
+        else {echo 'all right'; }*/
     }
 
     function render()
@@ -15,7 +17,6 @@ class View
         // Extract the data so you can access all the variables in
         // the "data" array inside your included view files
         ob_start(); extract($this->data);
-
         try
         {
             include $this->path;
@@ -26,8 +27,12 @@ class View
         }
 
         return ob_get_clean();
+        return ob_get_clean();
     }
 
+    /**
+     * Make it able for you to write a code like this: echo new View("home.php")
+     */
     function __toString()
     {
         return $this->render();
