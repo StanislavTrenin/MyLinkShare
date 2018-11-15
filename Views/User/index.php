@@ -23,9 +23,17 @@
                     <input type = "submit" name = "view" value = "View links"/>
                 </form>
 
-                <form action = "http://testlinkshare.com/link/viewOwn/" method = "post">
-                    <input type = "submit" name = "viewOwn" value = "View own links"/>
-                </form>
+                <?php if (isset($_SESSION['user_login'])):  ?>
+                    <form action = "http://testlinkshare.com/link/viewOwn/" method = "post">
+                        <input type = "submit" name = "viewOwn" value = "View own links"/>
+                    </form>
+                <?php endif; ?>
+
+                <?php if (isset($_SESSION['user_login'])):  ?>
+                    <form action = "http://testlinkshare.com/user/editSelf/" method = "post">
+                        <input type = "submit" name = "edit" value = "Edit profile"/>
+                    </form>
+                <?php endif; ?>
 
                 <?php if (isset($_SESSION['user_login'])):  ?>
                     <form action = "http://testlinkshare.com/user/logout/" method = "post">

@@ -26,6 +26,20 @@ class user extends Controller
         return $view;
     }
 
+    function editSelf($id)
+    {
+        $user_model = $this->model('userModel');
+        // This is how you use the view class!
+        if(isset($_POST['submit']))
+        {
+            $user_model->edit($_SESSION['user_id'], $_POST['login'], $_POST['mail'], $_POST['password'],
+                $_POST['confirm'], $_POST['first_name'], $_POST['second_name']);
+        }
+        $view = new View('../Views/User/edit.php', []);
+
+        return $view;
+    }
+
     function login($id)
     {
         $user_model = $this->model('userModel');

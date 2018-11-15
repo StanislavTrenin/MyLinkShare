@@ -56,6 +56,10 @@ class userModel extends Model
 
     }
 
+    function edit($id, $login, $mail, $password, $confirm, $first_name, $second_name){
+
+    }
+
     public function login($login, $password) {
 
         $db = new Database();
