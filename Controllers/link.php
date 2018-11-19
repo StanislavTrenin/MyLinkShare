@@ -6,8 +6,13 @@ class link extends Controller
         $link_model = $this->model('linkModel');
         // This is how you use the view class!
 
+
+        $page_info = $link_model->definePages();
+        //$last = round($count / $perpage) - 1;
+
+
         $view = new View('../Views/Link/view.php',
-            ['links' => $link_model->view($id)]);
+            ['links' => $link_model->view($id, $page_info), 'pages' => $page_info]);
 
         return $view;
     }
@@ -17,8 +22,10 @@ class link extends Controller
         $link_model = $this->model('linkModel');
         // This is how you use the view class!
 
+        $page_info = $link_model->definePages();
+
         $view = new View('../Views/Link/view.php',
-            ['links' => $link_model->viewOwn($_SESSION['user_id'])]);
+            ['links' => $link_model->viewOwn($_SESSION['user_id']), 'pages' => $page_info]);
 
         return $view;
     }
@@ -56,7 +63,7 @@ class link extends Controller
             $link_model->edit($_SESSION['user_id'], $id, $_POST['title'], $_POST['description'],
                 $_POST['link'], $_POST['private']);
         }
-        $view = new View('../Views/Link/edit.php', ['links' => $link_model->viewLink($id)]);
+        $view = new View('../Views/Link/editSelf.php', ['links' => $link_model->viewLink($id)]);
         return $view;
     }
 

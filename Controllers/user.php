@@ -32,10 +32,11 @@ class user extends Controller
         // This is how you use the view class!
         if(isset($_POST['submit']))
         {
-            $user_model->edit($_SESSION['user_id'], $_POST['login'], $_POST['mail'], $_POST['password'],
-                $_POST['confirm'], $_POST['first_name'], $_POST['second_name']);
+            $user_model->edit($_SESSION['user_id'], $_POST['login'], $_POST['mail'],
+                $_POST['old_password'], $_POST['password'], $_POST['confirm'],
+                $_POST['first_name'], $_POST['second_name']);
         }
-        $view = new View('../Views/User/edit.php', []);
+        $view = new View('../Views/User/editSelf.php', ['users' => $user_model->viewUser($id)]);
 
         return $view;
     }

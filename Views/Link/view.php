@@ -34,6 +34,30 @@
                 <?php unset($_SESSION['links']); ?>
             <?php endif; ?>
 
+            <?php if (isset($pages)): ?>
+                <?php if($pages['page'] != $pages['first']):?>
+                    <a href = "http://testlinkshare.com/link/view/?page=<?php echo $pages['first']?>"><<</a> |
+                <?php endif; ?>
+                <?php if($pages['page'] >= 3):?>
+                    <a href = "http://testlinkshare.com/link/view/?page=<?php echo $pages['pprev']?>"><?php echo $pages['pprev']?></a> |
+                <?php endif; ?>
+                <?php if($pages['page'] != $pages['first']):?>
+                    <a href = "http://testlinkshare.com/link/view/?page=<?php echo $pages['prev']?>"><?php echo $pages['prev']?></a> |
+                <?php endif; ?>
+
+                <a href = "http://testlinkshare.com/link/view/?page=<?php echo $pages['page']?>"><?php echo $pages['page']?></a> |
+
+                <?php if($pages['page'] != $pages['last']):?>
+                    <a href = "http://testlinkshare.com/link/view/?page=<?php echo $pages['next']?>"><?php echo $pages['next']?></a> |
+                <?php endif; ?>
+                <?php if($pages['page'] <= $pages['last'] - 2):?>
+                    <a href = "http://testlinkshare.com/link/view/?page=<?php echo $pages['nnext']?>"><?php echo $pages['nnext']?></a> |
+                <?php endif; ?>
+                <?php if($pages['page'] != $pages['last']):?>
+                    <a href = "http://testlinkshare.com/link/view/?page=<?php echo $pages['last']?>">>></a>
+                <?php endif; ?>
+
+            <?php endif;?>
 
         </div>
 

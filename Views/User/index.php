@@ -30,7 +30,7 @@
                 <?php endif; ?>
 
                 <?php if (isset($_SESSION['user_login'])):  ?>
-                    <form action = "http://testlinkshare.com/user/editSelf/" method = "post">
+                    <form action = "http://testlinkshare.com/user/editSelf/<?php echo $_SESSION['user_id']?>" method = "post">
                         <input type = "submit" name = "edit" value = "Edit profile"/>
                     </form>
                 <?php endif; ?>

@@ -1,11 +1,25 @@
 <?php
 class linkModel extends Model
 {
-    function view($id)
+    function view($id, $pages)
     {
+        $rez = array();
         $db = new Database();
         $sql = 'SELECT * FROM links';
         $stmt = $db->query($sql, []);
+
+        /*$index = 0;
+        echo 'index = '.$index. ' '.$pages['start'].' '.$pages['finish'];
+
+        while($row = $stmt->fetchAll()) {
+            if(($index >= $pages['start']) && ($index < $pages['finish'])) {
+                //array_push($rez, $row);
+                $rez[] = $row;
+                echo 'index = ' . $index;
+
+            }
+            $index++;
+        }*/
 
         return $stmt;
     }
@@ -27,6 +41,36 @@ class linkModel extends Model
         $stmt = $db->query($sql, [$id]);
 
         return $stmt;
+    }
+
+    function definePages()
+    {
+        $db = new Database();
+        $sql = 'SELECT count(*) FROM links';
+        $stmt = $db->query($sql, []);
+        $count = $stmt->fetchColumn();
+
+        $first = 1;
+        $last = round($count / 3) + 1;
+//echo'last = '.$last.' count = '.$count;
+        if( isset($_GET['page']) ) {
+            $page = $_GET['page'];
+
+        } else {
+            $page = 1;
+            $offset = 0;
+        }
+        $prev = $page - 1;
+        $pprev = $page -2;
+        $next = $page + 1;
+        $nnext = $page + 2;
+        $start = ($page - 1) * 3;
+        $finish = $start + 3;
+
+        $pags_info = ['page' => $page, 'first' => $first, 'last' => $last, 'prev' => $prev,
+            'pprev' => $pprev, 'next' => $next, 'nnext' => $nnext, 'start' => $start,
+            'finish' => $finish];
+        return $pags_info;
     }
 
     function create($author_id, $title, $description, $link, $private)
@@ -61,9 +105,11 @@ class linkModel extends Model
         } else {
             $privacy = 0;
         }
-        $sql = 'SELECT count(*) FROM links WHERE author_id = ? AND link = ?';
-        $stmt = $db->query($sql, [$author_id, $link]);
-        $link_exist = $stmt->fetchColumn();
+
+
+        $sql = 'SELECT count(*) FROM links WHERE author_id = ? AND link = ? AND link_id != ?';
+        $stmt = $db->query($sql, [$author_id, $link, $link_id]);
+        $link_exist = (bool)$stmt->fetchColumn();
         //echo'count = '.$link_exist;
 
         if(!$link_exist) {

@@ -56,8 +56,55 @@ class userModel extends Model
 
     }
 
-    function edit($id, $login, $mail, $password, $confirm, $first_name, $second_name){
+    function viewUser($id)
+    {
+        $db = new Database();
+        $sql = 'SELECT * FROM users WHERE user_id = ?';
+        $stmt = $db->query($sql, [$id]);
 
+        return $stmt;
+    }
+
+    function edit($id, $login, $mail, $old_password, $password, $confirm, $first_name, $second_name){
+        $db = new Database();
+
+        $newpassword = MD5($password . $login . SECRET);
+        $password_ok = false;
+
+        if ($password == $confirm) {
+            $password_ok = true;
+        }
+
+        $sql = 'SELECT count(*) FROM users WHERE login = ? AND user_id != ?';
+        $stmt = $db->query($sql, [$login, $id]);
+        $login_exist = $stmt->fetchColumn();
+
+        $sql = 'SELECT count(*) FROM users WHERE mail = ? AND user_id != ?';
+        $stmt = $db->query($sql, [$mail, $id]);
+        $mail_exist = $stmt->fetchColumn();
+
+        $user_exist = $login_exist || $mail_exist;
+
+        if (!$user_exist) {
+
+            if ($password_ok) {
+                $sql = 'UPDATE users SET login = ?, mail = ?, password = ?,
+ first_name = ?, second_name = ? WHERE user_id = ?';
+                $stmt = $db->query($sql,
+                    [$login, $mail, $newpassword, $first_name, $second_name, $id]);
+                header('location: http://testlinkshare.com/user/index/');
+            } else {
+                $_SESSION['error'] = 'Fail to confirm password!!!';
+            }
+        } else {
+            if ($login_exist) {
+                $_SESSION['error'] = 'This login already in use!!!';
+            }
+
+            if ($mail_exist) {
+                $_SESSION['error'] = 'This mail already in use!!!';
+            }
+        }
     }
 
     public function login($login, $password) {
