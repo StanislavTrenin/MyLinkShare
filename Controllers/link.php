@@ -7,12 +7,12 @@ class link extends Controller
         // This is how you use the view class!
 
 
-        $page_info = $link_model->definePages();
+        $page_info = $link_model->definePages($_SESSION['user_id'], 0);
         //$last = round($count / $perpage) - 1;
 
 
         $view = new View('../Views/Link/view.php',
-            ['links' => $link_model->view($id, $page_info), 'pages' => $page_info]);
+            ['links' => $link_model->view($_SESSION['user_id'], $page_info), 'pages' => $page_info, 'method' => 'view']);
 
         return $view;
     }
@@ -22,10 +22,10 @@ class link extends Controller
         $link_model = $this->model('linkModel');
         // This is how you use the view class!
 
-        $page_info = $link_model->definePages();
+        $page_info = $link_model->definePages($_SESSION['user_id'], 1);
 
         $view = new View('../Views/Link/view.php',
-            ['links' => $link_model->viewOwn($_SESSION['user_id']), 'pages' => $page_info]);
+            ['links' => $link_model->viewOwn($_SESSION['user_id'], $page_info), 'pages' => $page_info, 'method' => 'viewOwn']);
 
         return $view;
     }
@@ -65,6 +65,15 @@ class link extends Controller
         }
         $view = new View('../Views/Link/editSelf.php', ['links' => $link_model->viewLink($id)]);
         return $view;
+    }
+
+    function delete($id)
+    {
+        $link_model = $this->model('linkModel');
+        $link_model->delete($id);
+        $view = new View('../Views/Link/view.php', []);
+        return $view;
+
     }
 
 }

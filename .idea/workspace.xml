@@ -2,16 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0b980f8f-6642-4614-b8f8-8cff4d12ad01" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Views/User/editSelf.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/Database.php" beforeDir="false" afterPath="$PROJECT_DIR$/Config/Database.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controllers/link.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/link.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/user.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/user.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Models/linkModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/Models/linkModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/userModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/Models/userModel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/Layout/default.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/Layout/default.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/Link/view.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/Link/view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/User/edit.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/User/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/User/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/User/editSelf.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/User/editSelf.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -23,26 +19,26 @@
     <session id="-2002230033">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="9" />
+          <entry key="project.closed" value="10" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.1" value="3" />
           <entry key="project.open.time.10" value="1" />
           <entry key="project.open.time.13" value="2" />
-          <entry key="project.open.time.2" value="2" />
+          <entry key="project.open.time.2" value="3" />
           <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="10" />
+          <entry key="project.opened" value="11" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="htaccess" value="2" />
           <entry key="htcase" value="1" />
-          <entry key="php" value="410" />
+          <entry key="php" value="416" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="PHP" value="410" />
+          <entry key="PHP" value="416" />
           <entry key="PLAIN_TEXT" value="1" />
           <entry key="htaccess" value="2" />
         </counts>
@@ -51,12 +47,12 @@
         <counts>
           <entry key="dummy" value="4" />
           <entry key="htcase" value="1" />
-          <entry key="php" value="16111" />
+          <entry key="php" value="17395" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PHP" value="16102" />
+          <entry key="PHP" value="17386" />
           <entry key="PLAIN_TEXT" value="5" />
           <entry key="SQL" value="9" />
         </counts>
@@ -65,29 +61,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Models/linkModel.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="315">
-              <caret line="21" column="11" selection-start-line="21" selection-start-column="11" selection-end-line="21" selection-end-column="11" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Controllers/link.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="20" column="5" lean-forward="true" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
+              <caret line="81" lean-forward="true" selection-start-line="81" selection-end-line="81" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Views/Link/view.php">
+        <entry file="file://$PROJECT_DIR$/Controllers/link.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="840">
-              <caret line="56" column="107" lean-forward="true" selection-start-line="56" selection-start-column="107" selection-end-line="56" selection-end-column="107" />
+            <state relative-caret-position="210">
+              <caret line="14" column="62" selection-start-line="14" selection-start-column="62" selection-end-line="14" selection-end-column="62" />
             </state>
           </provider>
         </entry>
@@ -132,7 +119,6 @@
         <option value="$PROJECT_DIR$/Models/User.php" />
         <option value="$PROJECT_DIR$/Controllers/Controller.php" />
         <option value="$PROJECT_DIR$/Views/index.php" />
-        <option value="$PROJECT_DIR$/Views/Layout/default.php" />
         <option value="$PROJECT_DIR$/Models/Article.php" />
         <option value="$PROJECT_DIR$/Views/View.php" />
         <option value="$PROJECT_DIR$/Models/SiteModel.php" />
@@ -149,13 +135,14 @@
         <option value="$PROJECT_DIR$/Views/Link/edit.php" />
         <option value="$PROJECT_DIR$/Views/User/edit.php" />
         <option value="$PROJECT_DIR$/Views/User/index.php" />
-        <option value="$PROJECT_DIR$/Views/User/editSelf.php" />
         <option value="$PROJECT_DIR$/Models/userModel.php" />
         <option value="$PROJECT_DIR$/Controllers/user.php" />
         <option value="$PROJECT_DIR$/Config/Database.php" />
+        <option value="$PROJECT_DIR$/Views/User/editSelf.php" />
+        <option value="$PROJECT_DIR$/Views/Layout/default.php" />
         <option value="$PROJECT_DIR$/Views/Link/view.php" />
-        <option value="$PROJECT_DIR$/Models/linkModel.php" />
         <option value="$PROJECT_DIR$/Controllers/link.php" />
+        <option value="$PROJECT_DIR$/Models/linkModel.php" />
       </list>
     </option>
   </component>
@@ -166,8 +153,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="230" />
-    <option name="y" value="24" />
+    <option name="x" value="290" />
+    <option name="y" value="44" />
     <option name="width" value="1400" />
     <option name="height" value="1000" />
   </component>
@@ -176,7 +163,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -208,6 +194,12 @@
               <item name="MyLinkShare" type="b2602c69:ProjectViewProjectNode" />
               <item name="MyLinkShare" type="462c0819:PsiDirectoryNode" />
               <item name="Views" type="462c0819:PsiDirectoryNode" />
+              <item name="Layout" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MyLinkShare" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MyLinkShare" type="462c0819:PsiDirectoryNode" />
+              <item name="Views" type="462c0819:PsiDirectoryNode" />
               <item name="Link" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -225,6 +217,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -278,25 +271,26 @@
       <workItem from="1542087911645" duration="9407000" />
       <workItem from="1542174863108" duration="14493000" />
       <workItem from="1542263503836" duration="10770000" />
-      <workItem from="1542614995659" duration="8856000" />
+      <workItem from="1542614995659" duration="8983000" />
+      <workItem from="1542705628122" duration="6181000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="91308000" />
+    <option name="totallyTimeSpent" value="97616000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="230" y="24" width="1400" height="1000" extended-state="0" />
+    <frame x="290" y="44" width="1400" height="1000" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.22882615" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.23254086" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="0" weight="0.3298731" />
       <window_info anchor="bottom" id="Database Changes" order="1" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="3" show_stripe_button="false" />
-      <window_info anchor="bottom" id="File Transfer" order="4" weight="0.3298731" />
+      <window_info anchor="bottom" id="File Transfer" order="4" visible="true" weight="0.3298731" />
       <window_info anchor="bottom" id="Docker" order="5" show_stripe_button="false" />
       <window_info anchor="bottom" id="Message" order="6" />
       <window_info anchor="bottom" id="Find" order="7" weight="0.3298731" />
@@ -342,13 +336,6 @@
     <entry file="file://$PROJECT_DIR$/Views/Link/viewMy.php" />
     <entry file="file://$PROJECT_DIR$/Config/core.php" />
     <entry file="file://$PROJECT_DIR$/Webroot/core.php" />
-    <entry file="file://$PROJECT_DIR$/Views/Layout/default.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="26" selection-start-line="26" selection-end-line="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Request.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -419,13 +406,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Views/Link/viewLink.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="24" column="57" selection-start-line="24" selection-start-column="57" selection-end-line="24" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Views/User/create.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
@@ -444,13 +424,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="9" column="129" lean-forward="true" selection-start-line="9" selection-start-column="93" selection-end-line="9" selection-end-column="129" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Views/User/editSelf.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="20" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
         </state>
       </provider>
     </entry>
@@ -489,24 +462,45 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Views/Link/viewLink.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="314">
+          <caret line="24" column="57" selection-start-line="24" selection-start-column="57" selection-end-line="24" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Views/User/editSelf.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="98" lean-forward="true" selection-start-line="9" selection-start-column="98" selection-end-line="9" selection-end-column="98" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Views/Layout/default.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="454">
+          <caret line="83" column="9" lean-forward="true" selection-start-line="83" selection-start-column="9" selection-end-line="83" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Views/Link/view.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="840">
-          <caret line="56" column="107" lean-forward="true" selection-start-line="56" selection-start-column="107" selection-end-line="56" selection-end-column="107" />
+        <state relative-caret-position="79">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Controllers/link.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="62" selection-start-line="14" selection-start-column="62" selection-end-line="14" selection-end-column="62" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Models/linkModel.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
-          <caret line="21" column="11" selection-start-line="21" selection-start-column="11" selection-end-line="21" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Controllers/link.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="5" lean-forward="true" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
+          <caret line="81" lean-forward="true" selection-start-line="81" selection-end-line="81" />
         </state>
       </provider>
     </entry>

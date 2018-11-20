@@ -9,8 +9,8 @@
                 <form action = "" method = "post">
                     <label>Login name  :</label><input type = "text" name = "login" class = "box" required value = "<?php echo $user['login']?>" readonly/><br /><br />
                     <label>Mail address :</label><input type = "text" name = "mail" class = "box" required value = "<?php echo $user['mail']?>"/><br/><br />
-                    <label>Password  :</label><input type = "password" name = "password" class = "box" required/><br/><br />
-                    <label>Confirm  :</label><input type = "password" name = "confirm" class = "box" required/><br/><br />
+                    <label>Password  :</label><input type = "password" name = "password" class = "box" /><br/><br />
+                    <label>Confirm  :</label><input type = "password" name = "confirm" class = "box" /><br/><br />
                     <label>First name  :</label><input type = "text" name = "first_name" class = "box" required value = "<?php echo $user['first_name']?>"/><br/><br />
                     <label>Second name  :</label><input type = "text" name = "second_name" class = "box" required value = "<?php echo $user['second_name']?>"/><br/><br />
                 <?php endforeach; ?>
