@@ -9,9 +9,11 @@
             <?php endif; ?>
 
             <div class="row col-md-12 centered">
-                <form action = "http://testlinkshare.com/user/create/" method = "post">
-                    <input type = "submit" name = "create" value = " Create new user "/>
-                </form>
+                <?php if (!isset($_SESSION['user_login'])):  ?>
+                    <form action = "http://testlinkshare.com/user/create/" method = "post">
+                        <input type = "submit" name = "create" value = " Create new user "/>
+                    </form>
+                <?php endif; ?>
 
                 <?php if (!isset($_SESSION['user_login'])):  ?>
                     <form action = "http://testlinkshare.com/user/login/" method = "post">
@@ -19,12 +21,12 @@
                     </form>
                 <?php endif; ?>
 
-                <form action = "http://testlinkshare.com/link/view/" method = "post">
+                <form action = "http://testlinkshare.com/link/index/<?php echo $_SESSION['user_id']?>/1" method = "post">
                     <input type = "submit" name = "view" value = "View links"/>
                 </form>
 
                 <?php if (isset($_SESSION['user_login'])):  ?>
-                    <form action = "http://testlinkshare.com/link/viewOwn/" method = "post">
+                    <form action = "http://testlinkshare.com/link/viewOwn/<?php echo $_SESSION['user_id']?>/1" method = "post">
                         <input type = "submit" name = "viewOwn" value = "View own links"/>
                     </form>
                 <?php endif; ?>

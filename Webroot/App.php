@@ -7,7 +7,21 @@ class App
         $request = new Request();
 
         $route = new Route($request);
-        return $route->call(new Database());
+        $rez = $route->route();
+        return $this->call($rez);
+    }
+
+    function call($data = array())
+    {
+        $database = new Database();
+        $controller = new $data['class']($database);
+
+        foreach ($data['params'] as $dat){
+            echo ' there = '.$dat;
+        }
+        $response = call_user_func_array(array($controller, $data['method']), $data['params']);
+
+        return $response;
     }
 }
 ?>

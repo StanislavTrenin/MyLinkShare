@@ -1,7 +1,7 @@
 <?php
 class linkModel extends Model
 {
-    function view($id, $pages)
+    function index($id, $pages)
     {
         $rez = array();
         $db = new Database();
@@ -23,7 +23,7 @@ class linkModel extends Model
 
             if($row['privacy'] != 1 || $row['author_id'] == $id) {
                 $index++;
-                echo ' index = '.$index. ' post = '.$row['link_id'];
+                //echo ' index = '.$index. ' post = '.$row['link_id'];
             }
 
         }
@@ -64,7 +64,7 @@ class linkModel extends Model
         return $stmt;
     }
 
-    function definePages($id, $all)
+    function definePages($id, $curpage, $all)
     {
         $db = new Database();
 
@@ -96,8 +96,8 @@ class linkModel extends Model
             $last ++;
         }
 
-        if( isset($_GET['page']) ) {
-            $page = $_GET['page'];
+        if( isset($curpage) ) {
+            $page = $curpage;
 
         } else {
             $page = 1;
@@ -111,7 +111,7 @@ class linkModel extends Model
         $start = ($page - 1) * 3;
         $finish = $start + 3;
 
-        echo 'start= '.$start.' finish = '.$finish;
+        //echo 'start= '.$start.' finish = '.$finish;
         $pags_info = ['page' => $page, 'first' => $first, 'last' => $last, 'prev' => $prev,
             'pprev' => $pprev, 'next' => $next, 'nnext' => $nnext, 'start' => $start,
             'finish' => $finish];
@@ -140,7 +140,7 @@ class linkModel extends Model
             $stmt = $db->query($sql, [$author_id, $title, $description, $link, $private]);
 
             //echo' '.$author_id.' '.$title.' '.$description.' '.$link.' '.$private;
-            header('location: http://testlinkshare.com/link/view/');
+            header('location: http://testlinkshare.com/link/index/');
         } else {
             $_SESSION['error'] = 'You already create this link!!!';
         }
@@ -168,7 +168,7 @@ class linkModel extends Model
             $stmt = $db->query($sql, [$title, $description, $link, $privacy, $link_id]);
 
             //echo ' '.$author_id.' ' . $link_id . ' ' . $title . ' ' . $description . ' ' . $link . ' ' . $privacy;
-            header('location: http://testlinkshare.com/link/view/');
+            header('location: http://testlinkshare.com/link/index/');
         } else {
             $_SESSION['error'] = 'You already create this link!!!';
         }
@@ -179,7 +179,7 @@ class linkModel extends Model
         $db = new Database();
         $sql = 'DELETE FROM links WHERE link_id =?';
         $stmt = $db->query($sql, [$id]);
-        header('location: http://testlinkshare.com/link/view/');
+        header('location: http://testlinkshare.com/link/index/');
     }
 
 

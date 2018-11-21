@@ -4,6 +4,7 @@
 
         <div style = "margin:60px">
 
+
             <?php if (isset($links)): ?>
                 <?php foreach($links as $link):?>
                 <form action = "" method = "post">
@@ -33,4 +34,4 @@
     </div>
 
 </div>
-<h2><a href = "http://testlinkshare.com/link/view/">Go back</a></h2>
+<h2><a href = "http://testlinkshare.com/link/index/">Go back</a></h2>

@@ -10,6 +10,7 @@ class userModel extends Model
     function create($login, $mail, $password, $confirm, $first_name, $second_name)
     {
 
+
         $db = new Database();
         $newpassword = MD5($password . $login . SECRET);
         $password_ok = false;
@@ -35,8 +36,41 @@ class userModel extends Model
  second_name, active) VALUES (?, ?, ?, ?, ?, ?)';
                 $stmt = $db->query($sql, [$login, $mail, $newpassword,
                     $first_name, $second_name, 0]);
+                $sql = 'SELECT user_id FROM users WHERE login = ?';
+                $stmt = $db->query($sql, [$login]);
+                $id = $stmt->fetchColumn();
 
+                $hash = MD5($mail.$login.SECRET);
+                $link = 'http://testlinkshare.com/user/verify/?email=' . $mail . '&login=' . $login .
+                    '&id='. $id .'&hash=' . $hash;
 
+                $mymail = new PHPMailer\PHPMailer\PHPMailer();
+                $mymail->IsSMTP(); // enable SMTP
+
+                $sql = 'SELECT pswd FROM psw';
+                $stmt = $db->query($sql, []);
+                $pswd = $stmt->fetchColumn();
+
+                echo'pswd = '.$pswd;
+
+                $mymail->SMTPDebug = 0; // debugging: 1 = errors and messages, 2 = messages only
+                $mymail->SMTPAuth = true; // authentication enabled
+                $mymail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for Gmail
+                $mymail->Host = 'smtp.gmail.com';
+                $mymail->Port = 465; // or 587
+                $mymail->IsHTML(true);
+                $mymail->Username = 'strenin25@gmail.com';
+                $mymail->Password = $pswd;
+                $mymail->SetFrom('strenin25@gmail.com');
+                $mymail->Subject = 'Test';
+                $mymail->Body = 'Link to verify you account '.$link;
+                $mymail->AddAddress($mail);
+
+                if(!$mymail->Send()) {
+                    echo 'Mailer Error: ' . $mymail->ErrorInfo;
+                } else {
+                    echo 'Message has been sent';
+                }
 
 
                 header('location: http://testlinkshare.com/user/index/');
@@ -115,25 +149,53 @@ class userModel extends Model
         $stmt = $db->query($sql, [$login]);
         $user_password = $stmt->fetchColumn();
 
-        if($newpassword == $user_password) {
-            $sql = 'SELECT user_id FROM users WHERE login = ?';
-            $stmt = $db->query($sql, [$login]);
-            $id = $stmt->fetchColumn();
+        $sql = 'SELECT active FROM users WHERE login = ?';
+        $stmt = $db->query($sql, [$login]);
+        $active = $stmt->fetchColumn();
 
-            $_SESSION['user_id'] = $id;
-            $_SESSION['user_login'] = $login;
-            header('location: http://testlinkshare.com/user/index/');
+        if($newpassword == $user_password) {
+            if($active == 1) {
+                $sql = 'SELECT user_id FROM users WHERE login = ?';
+                $stmt = $db->query($sql, [$login]);
+                $id = $stmt->fetchColumn();
+
+                $_SESSION['user_id'] = $id;
+                $_SESSION['user_login'] = $login;
+                header('location: http://testlinkshare.com/user/index/');
+            } else {
+                $_SESSION['error'] = 'You are not activate yet!!! Please, check your mail!!!';
+            }
 
         } else {
             $_SESSION['error'] = 'Incorrect login or password!!!';
         }
-        echo 'my password = '.$newpassword.' real password = '.$user_password;
+       echo 'my password = '.$newpassword.' real password = '.$user_password;
     }
 
     public function logout() {
         unset($_SESSION['user_id']);
         unset($_SESSION['user_login ']);
-        session_destroy();
+        if(session_destroy()) {
+            header('location: http://testlinkshare.com/user/index/');
+        }
+
+    }
+
+    function verify($id, $mail, $login, $hash)
+    {
+        $db = new Database();
+        $here = MD5($mail.$login.SECRET);
+
+        echo $id.' '.$mail.' '.$login.' '.$hash.' '.$here;
+        if ($here == $hash) {
+
+            $sql = 'UPDATE users SET active = 1 WHERE user_id = ?';
+            $stmt = $db->query($sql, [$id]);
+            return 1;
+
+        } else {
+            return 0;
+        }
 
     }
 }

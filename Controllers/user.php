@@ -4,7 +4,6 @@ class user extends Controller
     function index($id)
     {
         $user_model = $this->model('userModel');
-        // This is how you use the view class!
 
         $view = new View('../Views/User/index.php',
             ['users' => $user_model->index($id)]);
@@ -15,7 +14,7 @@ class user extends Controller
     function create($id)
     {
         $user_model = $this->model('userModel');
-        // This is how you use the view class!
+
         if(isset($_POST['submit']))
         {
             $user_model->create($_POST['login'], $_POST['mail'], $_POST['password'],
@@ -29,7 +28,7 @@ class user extends Controller
     function editSelf($id)
     {
         $user_model = $this->model('userModel');
-        // This is how you use the view class!
+
         if(isset($_POST['submit']))
         {
             $user_model->edit($_SESSION['user_id'], $_POST['login'], $_POST['mail'],
@@ -44,7 +43,7 @@ class user extends Controller
     function login($id)
     {
         $user_model = $this->model('userModel');
-        // This is how you use the view class!
+
         if(isset($_POST['submit']))
         {
             $user_model->login($_POST['login'],  $_POST['password']);
@@ -57,10 +56,19 @@ class user extends Controller
     function logout($id)
     {
         $user_model = $this->model('userModel');
-        // This is how you use the view class!
+
         $user_model->logout();
-        $view = new View('../Views/User/index.php',
-            ['users' => $user_model->index($id)]);
+        $view = new View('../Views/User/index.php', []);
+
+        return $view;
+    }
+
+    function verify($id)
+    {
+        $user_model = $this->model('userModel');
+
+        $rez = $user_model->verify($_GET['id'], $_GET['email'], $_GET['login'], $_GET['hash']);
+        $view = new View('../Views/User/verify.php', ['rez' => $rez]);
 
         return $view;
     }

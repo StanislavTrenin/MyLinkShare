@@ -1,31 +1,31 @@
 <?php
 class link extends Controller
 {
-    function view($id)
+    function index($id, $page)
     {
+
+        //echo 'id = '.$id.' page = '.$page;
         $link_model = $this->model('linkModel');
-        // This is how you use the view class!
 
-
-        $page_info = $link_model->definePages($_SESSION['user_id'], 0);
+        $page_info = $link_model->definePages($id, $page, 0);
         //$last = round($count / $perpage) - 1;
 
 
         $view = new View('../Views/Link/view.php',
-            ['links' => $link_model->view($_SESSION['user_id'], $page_info), 'pages' => $page_info, 'method' => 'view']);
+            ['links' => $link_model->index($id, $page_info), 'pages' => $page_info, 'method' => 'index']);
 
         return $view;
     }
 
-    function viewOwn($id)
+    function viewOwn($id, $page)
     {
+        //id from params, rename
         $link_model = $this->model('linkModel');
-        // This is how you use the view class!
 
-        $page_info = $link_model->definePages($_SESSION['user_id'], 1);
+        $page_info = $link_model->definePages($id, $page, 1);
 
         $view = new View('../Views/Link/view.php',
-            ['links' => $link_model->viewOwn($_SESSION['user_id'], $page_info), 'pages' => $page_info, 'method' => 'viewOwn']);
+            ['links' => $link_model->viewOwn($id, $page_info), 'pages' => $page_info, 'method' => 'viewOwn']);
 
         return $view;
     }
@@ -33,7 +33,7 @@ class link extends Controller
     function viewLink($id)
     {
         $link_model = $this->model('linkModel');
-        // This is how you use the view class!
+
 
         $view = new View('../Views/Link/viewLink.php',
             ['links' => $link_model->viewLink($id)]);
@@ -45,8 +45,9 @@ class link extends Controller
 
     function create($id)
     {
+        //data from params not post
         $link_model = $this->model('linkModel');
-        // This is how you use the view class!
+
         if(isset($_POST['create'])) {
             $link_model->create($_SESSION['user_id'], $_POST['title'], $_POST['description'],
                     $_POST['link'], $_POST['private']);
@@ -58,12 +59,12 @@ class link extends Controller
     function edit($id)
     {
         $link_model = $this->model('linkModel');
-        // This is how you use the view class!
+
         if(isset($_POST['edit'])) {
             $link_model->edit($_SESSION['user_id'], $id, $_POST['title'], $_POST['description'],
                 $_POST['link'], $_POST['private']);
         }
-        $view = new View('../Views/Link/editSelf.php', ['links' => $link_model->viewLink($id)]);
+        $view = new View('../Views/Link/edit.php', ['links' => $link_model->viewLink($id)]);
         return $view;
     }
 
