@@ -11,8 +11,9 @@ class user extends Controller
         return $view;
     }
 
-    function create($id)
+    function create()
     {
+        echo'here!!!';
         $user_model = $this->model('userModel');
 
         if(isset($_POST['submit']))
@@ -27,20 +28,22 @@ class user extends Controller
 
     function editSelf($id)
     {
+        //rename
         $user_model = $this->model('userModel');
 
         if(isset($_POST['submit']))
         {
-            $user_model->edit($_SESSION['user_id'], $_POST['login'], $_POST['mail'],
+            $user_model->edit($id, $_POST['login'], $_POST['mail'],
                 $_POST['old_password'], $_POST['password'], $_POST['confirm'],
                 $_POST['first_name'], $_POST['second_name']);
         }
         $view = new View('../Views/User/editSelf.php', ['users' => $user_model->viewUser($id)]);
+        //only name no path
 
         return $view;
     }
 
-    function login($id)
+    function login()
     {
         $user_model = $this->model('userModel');
 
@@ -53,7 +56,7 @@ class user extends Controller
         return $view;
     }
 
-    function logout($id)
+    function logout()
     {
         $user_model = $this->model('userModel');
 
@@ -63,11 +66,11 @@ class user extends Controller
         return $view;
     }
 
-    function verify($id)
+    function verify($id, $mail, $login, $hash)
     {
         $user_model = $this->model('userModel');
 
-        $rez = $user_model->verify($_GET['id'], $_GET['email'], $_GET['login'], $_GET['hash']);
+        $rez = $user_model->verify($id, $mail, $login, $hash);
         $view = new View('../Views/User/verify.php', ['rez' => $rez]);
 
         return $view;

@@ -17,7 +17,7 @@ class link extends Controller
         return $view;
     }
 
-    function viewOwn($id, $page)
+    function viewByUser($id, $page)
     {
         //id from params, rename
         $link_model = $this->model('linkModel');
@@ -25,7 +25,7 @@ class link extends Controller
         $page_info = $link_model->definePages($id, $page, 1);
 
         $view = new View('../Views/Link/view.php',
-            ['links' => $link_model->viewOwn($id, $page_info), 'pages' => $page_info, 'method' => 'viewOwn']);
+            ['links' => $link_model->viewByUser($id, $page_info), 'pages' => $page_info, 'method' => 'viewByUser']);
 
         return $view;
     }
@@ -49,7 +49,7 @@ class link extends Controller
         $link_model = $this->model('linkModel');
 
         if(isset($_POST['create'])) {
-            $link_model->create($_SESSION['user_id'], $_POST['title'], $_POST['description'],
+            $link_model->create($id, $_POST['title'], $_POST['description'],
                     $_POST['link'], $_POST['private']);
         }
         $view = new View('../Views/Link/create.php', []);

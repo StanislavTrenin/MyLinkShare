@@ -8,7 +8,7 @@
                 <h2><div><?php echo 'Hello '.$_SESSION['user_login'].'!'; ?></div></h2>
             <?php endif; ?>
 
-            <div class="row col-md-12 centered">
+            <div class="mx-auto" style="width: 200px;">
                 <?php if (!isset($_SESSION['user_login'])):  ?>
                     <form action = "http://testlinkshare.com/user/create/" method = "post">
                         <input type = "submit" name = "create" value = " Create new user "/>
@@ -26,8 +26,8 @@
                 </form>
 
                 <?php if (isset($_SESSION['user_login'])):  ?>
-                    <form action = "http://testlinkshare.com/link/viewOwn/<?php echo $_SESSION['user_id']?>/1" method = "post">
-                        <input type = "submit" name = "viewOwn" value = "View own links"/>
+                    <form action = "http://testlinkshare.com/link/viewByUser/<?php echo $_SESSION['user_id']?>/1" method = "post">
+                        <input type = "submit" name = "viewByUser" value = "View you own links"/>
                     </form>
                 <?php endif; ?>
 

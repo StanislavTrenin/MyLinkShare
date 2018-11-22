@@ -31,7 +31,7 @@ class linkModel extends Model
         return $rez;
     }
 
-    function viewOwn($id, $pages)
+    function viewByUser($id, $pages)
     {
         $rez = array();
         $db = new Database();
@@ -90,9 +90,9 @@ class linkModel extends Model
 
         //echo ' count = '.$count.' private = '.$private.' id = '.$id;
         $first = 1;
-        $last = intdiv($count , 3);
+        $last = intdiv($count , Config::PERPAGE);
 
-        if($count % 3 != 0) {
+        if($count % Config::PERPAGE != 0) {
             $last ++;
         }
 
@@ -108,8 +108,8 @@ class linkModel extends Model
         $pprev = $page -2;
         $next = $page + 1;
         $nnext = $page + 2;
-        $start = ($page - 1) * 3;
-        $finish = $start + 3;
+        $start = ($page - 1) * Config::PERPAGE;
+        $finish = $start + Config::PERPAGE;
 
         //echo 'start= '.$start.' finish = '.$finish;
         $pags_info = ['page' => $page, 'first' => $first, 'last' => $last, 'prev' => $prev,
@@ -140,7 +140,7 @@ class linkModel extends Model
             $stmt = $db->query($sql, [$author_id, $title, $description, $link, $private]);
 
             //echo' '.$author_id.' '.$title.' '.$description.' '.$link.' '.$private;
-            header('location: http://testlinkshare.com/link/index/');
+            header('location: http://testlinkshare.com/link/index/'.$author_id.'/1');
         } else {
             $_SESSION['error'] = 'You already create this link!!!';
         }
@@ -168,7 +168,7 @@ class linkModel extends Model
             $stmt = $db->query($sql, [$title, $description, $link, $privacy, $link_id]);
 
             //echo ' '.$author_id.' ' . $link_id . ' ' . $title . ' ' . $description . ' ' . $link . ' ' . $privacy;
-            header('location: http://testlinkshare.com/link/index/');
+            header('location: http://testlinkshare.com/link/index/'.$author_id.'/1');
         } else {
             $_SESSION['error'] = 'You already create this link!!!';
         }

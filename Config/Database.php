@@ -1,8 +1,9 @@
 <?php
 class Database
 {
-    const SECRET = "35onoi2=-7#%g03kl";
-    const PERPAGE = '3';
+    //const SECRET = "35onoi2=-7#%g03kl";
+    //const PERPAGE = '3';
+
     private $db;
 
     function __construct()

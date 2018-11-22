@@ -8,12 +8,14 @@ class App
 
         $route = new Route($request);
         $rez = $route->route();
+
         return $this->call($rez);
     }
 
     function call($data = array())
     {
         $database = new Database();
+        //acl
         $controller = new $data['class']($database);
 
         foreach ($data['params'] as $dat){

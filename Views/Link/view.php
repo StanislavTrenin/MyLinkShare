@@ -8,7 +8,7 @@
 
                 <h2><?php echo 'Hello '.$_SESSION['user_login'].'!'; ?></h2>
 
-                <form action = "http://testlinkshare.com/link/create/" method = "post">
+                <form action = "http://testlinkshare.com/link/create/<?php echo $_SESSION['user_id']?>" method = "post">
                     <input type = "submit" name = "submit" value = " Create new link "/>
                 </form>
             <?php endif; ?>
@@ -25,9 +25,12 @@
                             <form action = "http://testlinkshare.com/link/edit/<?php echo $link['link_id']?>" method = "post">
                                 <input type = "submit" name = "submit" value = "Edit"/>
                             </form>
+
+
                             <form action = "http://testlinkshare.com/link/delete/<?php echo $link['link_id']?>" method = "post" >
                                 <input type = "submit" name = "submit" onclick="confSubmit(this.form);" value = "Delete"/>
                             </form>
+
                         <?php endif; ?><br/>
                     <?php endif; ?>
                 <?php endforeach; ?>

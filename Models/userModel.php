@@ -41,8 +41,7 @@ class userModel extends Model
                 $id = $stmt->fetchColumn();
 
                 $hash = MD5($mail.$login.SECRET);
-                $link = 'http://testlinkshare.com/user/verify/?email=' . $mail . '&login=' . $login .
-                    '&id='. $id .'&hash=' . $hash;
+                $link = 'http://testlinkshare.com/user/verify/' . $mail . '/' . $login . '/'. $id .'/' . $hash;
 
                 $mymail = new PHPMailer\PHPMailer\PHPMailer();
                 $mymail->IsSMTP(); // enable SMTP
@@ -73,7 +72,7 @@ class userModel extends Model
                 }
 
 
-                header('location: http://testlinkshare.com/user/index/');
+                //header('location: http://testlinkshare.com/user/index/');
             } else {
                 $_SESSION['error'] = 'Fail to confirm password!!!';
             }
