@@ -1,12 +1,22 @@
 <?php
 
-
+$config = [];
 
 class Config
 {
 
-    const SECRET = '35onoi2=-7#%g03kl';
-    const PERPAGE = '3';
+    public function __construct()
+    {
+
+        $data = [
+          'secret' => '35onoi2=-7#%g03kl',
+            'perpage' => '3'
+        ];
+        global $config;
+        $config= $data;
+
+    }
+
 
 }
 

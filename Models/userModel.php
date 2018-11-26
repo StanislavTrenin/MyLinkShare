@@ -11,8 +11,10 @@ class userModel extends Model
     {
 
 
+        global $config;
+        $secret = $config['secret'];
         $db = new Database();
-        $newpassword = MD5($password . $login . SECRET);
+        $newpassword = MD5($password . $login . $secret);
         $password_ok = false;
 
         if ($password == $confirm) {
@@ -28,10 +30,11 @@ class userModel extends Model
         $mail_exist = $stmt->fetchColumn();
 
         $user_exist = $login_exist || $mail_exist;
-
+        echo'lol = ';
         if (!$user_exist) {
 
             if ($password_ok) {
+                echo'lol = ';
                 $sql = 'INSERT INTO users (login, mail, password, first_name,
  second_name, active) VALUES (?, ?, ?, ?, ?, ?)';
                 $stmt = $db->query($sql, [$login, $mail, $newpassword,
@@ -39,13 +42,16 @@ class userModel extends Model
                 $sql = 'SELECT user_id FROM users WHERE login = ?';
                 $stmt = $db->query($sql, [$login]);
                 $id = $stmt->fetchColumn();
-
-                $hash = MD5($mail.$login.SECRET);
-                $link = 'http://testlinkshare.com/user/verify/' . $mail . '/' . $login . '/'. $id .'/' . $hash;
-
+                echo'lol = ';
+                global $config;
+                $secret = $config['secret'];
+                echo'lol = ';
+                $hash = MD5($mail.$login.$secret);
+                $link = 'http://testlinkshare.com/user/verify/' .$id.'/'. $mail . '/' . $login . '/'.$hash;
+                echo'lol = ';
                 $mymail = new PHPMailer\PHPMailer\PHPMailer();
                 $mymail->IsSMTP(); // enable SMTP
-
+                echo'lol = ';
                 $sql = 'SELECT pswd FROM psw';
                 $stmt = $db->query($sql, []);
                 $pswd = $stmt->fetchColumn();
@@ -98,14 +104,27 @@ class userModel extends Model
         return $stmt;
     }
 
-    function edit($id, $login, $mail, $old_password, $password, $confirm, $first_name, $second_name){
+    function edit($id, $login, $mail, $password, $confirm, $first_name, $second_name){
         $db = new Database();
 
-        $newpassword = MD5($password . $login . SECRET);
-        $password_ok = false;
-
-        if ($password == $confirm) {
+        if($password == '')
+        {
+            $sql = 'SELECT password FROM users WHERE login = ?';
+            $stmt = $db->query($sql, [$login]);
+            $newpassword = $stmt->fetchColumn();
             $password_ok = true;
+
+        }
+
+        else {
+            global $config;
+            $secret = $config['secret'];
+            $newpassword = MD5($password . $login . $secret);
+            $password_ok = false;
+
+            if ($password == $confirm) {
+                $password_ok = true;
+            }
         }
 
         $sql = 'SELECT count(*) FROM users WHERE login = ? AND user_id != ?';
@@ -142,9 +161,14 @@ class userModel extends Model
 
     public function login($login, $password) {
 
+        global $config;
+        $secret = $config['secret'];
+
         $db = new Database();
-        $newpassword = MD5($password.$login.SECRET);
-        $sql = 'SELECT password FROM users WHERE login = ?';
+        $newpassword = MD5($password.$login.$secret);
+
+
+            $sql = 'SELECT password FROM users WHERE login = ?';
         $stmt = $db->query($sql, [$login]);
         $user_password = $stmt->fetchColumn();
 
@@ -183,9 +207,12 @@ class userModel extends Model
     function verify($id, $mail, $login, $hash)
     {
         $db = new Database();
-        $here = MD5($mail.$login.SECRET);
+        global $config;
+        $secret = $config['secret'];
+        $here = MD5($mail.$login.$secret);
 
-        echo $id.' '.$mail.' '.$login.' '.$hash.' '.$here;
+        echo 'kek    ';
+        echo 'id = '.$id.' mail = '.$mail.' login = '.$login.' hash = '.$hash.' here = '.$here;
         if ($here == $hash) {
 
             $sql = 'UPDATE users SET active = 1 WHERE user_id = ?';

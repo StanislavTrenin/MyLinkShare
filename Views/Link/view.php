@@ -1,4 +1,4 @@
-<div align = "center">
+<div align="center" xmlns="http://www.w3.org/1999/html">
     <div style = "width:300px; border: solid 1px #333333; " align = "left">
         <div style = "background-color:#333333; color:#FFFFFF; padding:3px;"><b>View links</b></div>
 
@@ -17,6 +17,7 @@
                 <?php foreach($links as $link):?>
                     <?php if ( (!$link['privacy']) || ($_SESSION['user_id'] == $link['author_id'])): ?>
 
+
                         <h4><a href = "http://testlinkshare.com/link/viewLink/<?php echo $link['link_id']?>"><?php echo $link['title']?></a></h4>
                         <?php echo substr($link['description'], 0, 50)?><br/>
                         <?php echo $link['link']?><br/>
@@ -27,11 +28,28 @@
                             </form>
 
 
-                            <form action = "http://testlinkshare.com/link/delete/<?php echo $link['link_id']?>" method = "post" >
-                                <input type = "submit" name = "submit" onclick="confSubmit(this.form);" value = "Delete"/>
-                            </form>
+                            <input type="button" name="btn" value="Delete" id="submitBtn" data-toggle="modal" data-target="#confirm-submit" class="btn btn-primary" /><br/>
 
-                        <?php endif; ?><br/>
+                            <div class="modal fade" id="confirm-submit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            Confirm Submit
+                                        </div>
+                                        <div class="modal-body">
+                                            Are you sure you want to delete the following link?
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                            <a href="http://testlinkshare.com/link/delete/<?php echo $link['link_id']?>" id="submit" class="btn btn-primary">Delete</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        <?php endif; ?>
+            <hr size="30" color="blue" ></br>
                     <?php endif; ?>
                 <?php endforeach; ?>
                 <?php unset($_SESSION['links']); ?>

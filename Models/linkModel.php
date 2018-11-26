@@ -90,11 +90,14 @@ class linkModel extends Model
 
         //echo ' count = '.$count.' private = '.$private.' id = '.$id;
         $first = 1;
-        $last = intdiv($count , Config::PERPAGE);
+        global $config;
+        $perpage = $config['perpage'];
+        $last = intdiv($count , $perpage);
 
-        if($count % Config::PERPAGE != 0) {
+        if($count % $perpage != 0 || $count == 0    ) {
             $last ++;
         }
+        echo 'count = '.$count.'last = '.$last;
 
         if( isset($curpage) ) {
             $page = $curpage;
@@ -108,8 +111,8 @@ class linkModel extends Model
         $pprev = $page -2;
         $next = $page + 1;
         $nnext = $page + 2;
-        $start = ($page - 1) * Config::PERPAGE;
-        $finish = $start + Config::PERPAGE;
+        $start = ($page - 1) * $perpage;
+        $finish = $start + $perpage;
 
         //echo 'start= '.$start.' finish = '.$finish;
         $pags_info = ['page' => $page, 'first' => $first, 'last' => $last, 'prev' => $prev,
@@ -179,7 +182,7 @@ class linkModel extends Model
         $db = new Database();
         $sql = 'DELETE FROM links WHERE link_id =?';
         $stmt = $db->query($sql, [$id]);
-        header('location: http://testlinkshare.com/link/index/');
+        header('location: http://testlinkshare.com/link/index/'.$id.'/1');
     }
 
 

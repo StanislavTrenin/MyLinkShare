@@ -34,7 +34,7 @@ class user extends Controller
         if(isset($_POST['submit']))
         {
             $user_model->edit($id, $_POST['login'], $_POST['mail'],
-                $_POST['old_password'], $_POST['password'], $_POST['confirm'],
+                $_POST['password'], $_POST['confirm'],
                 $_POST['first_name'], $_POST['second_name']);
         }
         $view = new View('../Views/User/editSelf.php', ['users' => $user_model->viewUser($id)]);
