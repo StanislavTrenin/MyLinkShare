@@ -75,5 +75,23 @@ class user extends Controller
 
         return $view;
     }
+
+    function view($id)
+    {
+        $user_model = $this->model('userModel');
+
+        $users = $user_model->view($id);
+        $view = new View('../Views/User/view.php', ['users' => $users]);
+
+        return $view;
+    }
+
+    function delete($id, $myid)
+    {
+        $user_model = $this->model('userModel');
+        $user_model->delete($id, $myid);
+        $view = new View('../Views/User/view.php', []);
+        return $view;
+    }
 }
 ?>

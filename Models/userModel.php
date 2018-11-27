@@ -34,7 +34,7 @@ class userModel extends Model
         if (!$user_exist) {
 
             if ($password_ok) {
-                echo'lol = ';
+
                 $sql = 'INSERT INTO users (login, mail, password, first_name,
  second_name, active) VALUES (?, ?, ?, ?, ?, ?)';
                 $stmt = $db->query($sql, [$login, $mail, $newpassword,
@@ -42,16 +42,18 @@ class userModel extends Model
                 $sql = 'SELECT user_id FROM users WHERE login = ?';
                 $stmt = $db->query($sql, [$login]);
                 $id = $stmt->fetchColumn();
-                echo'lol = ';
+
                 global $config;
                 $secret = $config['secret'];
-                echo'lol = ';
+
                 $hash = MD5($mail.$login.$secret);
+                $sql = 'INSERT INTO confirmation (time, hash) VALUES (?, ?)';
+                $stmt = $db->query($sql, [date('Y-m-d G:i:s'), $hash]);
                 $link = 'http://testlinkshare.com/user/verify/' .$id.'/'. $mail . '/' . $login . '/'.$hash;
-                echo'lol = ';
+
                 $mymail = new PHPMailer\PHPMailer\PHPMailer();
                 $mymail->IsSMTP(); // enable SMTP
-                echo'lol = ';
+
                 $sql = 'SELECT pswd FROM psw';
                 $stmt = $db->query($sql, []);
                 $pswd = $stmt->fetchColumn();
@@ -224,6 +226,26 @@ class userModel extends Model
         }
 
     }
+
+    function view($id)
+    {
+        $db = new Database();
+        $sql = 'SELECT * FROM users';
+        $stmt = $db->query($sql, []);
+
+        return $stmt;
+
+    }
+
+    function delete($id, $myid)
+    {
+        echo'id = '.$id.' myid = '.$myid;
+        $db = new Database();
+        $sql = 'DELETE FROM users WHERE user_id =?';
+        $stmt = $db->query($sql, [$id]);
+        //header('location: http://testlinkshare.com/user/view/'.$myid);
+    }
+
 }
 
 ?>
