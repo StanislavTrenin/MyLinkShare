@@ -1,6 +1,38 @@
 <?php
 class ACL{
 
+
+
+    private function get_role_id($db)
+    {
+        if (isset($_SESSION['user_id'])) {
+            $sql = 'SELECT role_id FROM users WHERE user_id = ?';
+            $stmt = $db->query($sql, [$_SESSION['user_id']]);
+            $role_id = $stmt->fetchColumn();
+        } else {
+            $role_id = 4;
+        }
+        echo ' role_id = '.$role_id;
+        return $role_id;
+    }
+
+
+    private function check_any($db, $sql, $role_id, $data = array())
+    {
+        $stmt = $db->query($sql, [$role_id, $data['class'].'_'.$data['method'].'_any']);
+        $is_any = (bool)$stmt->fetchColumn();
+        echo ' is_any = '.$is_any;
+        return $is_any;
+    }
+
+    private function check_own($db, $sql, $role_id, $data = array())
+    {
+        $stmt = $db->query($sql, [$role_id, $data['class'].'_'.$data['method'].'_own']);
+        $is_own = (bool)$stmt->fetchColumn();
+        echo ' is_own = ' . $is_own;
+        return $is_own;
+    }
+
     public function check($data = array())
     {
         $db = new Database();
@@ -9,25 +41,14 @@ class ACL{
             echo ' params_there = '.$dat;
         }
 
-        if (isset($_SESSION['user_id'])) {
-            $sql = 'SELECT ACL_id FROM users WHERE user_id = ?';
-            $stmt = $db->query($sql, [$_SESSION['user_id']]);
-            $role_id = $stmt->fetchColumn();
-        } else {
-            $role_id = 4;
-        }
-        echo ' role_id = '.$role_id;
+        $role_id = $this->get_role_id($db);
 
         $sql = 'SELECT count(*) FROM ACL WHERE role_id = ? AND rule = ?';
 
-        $stmt = $db->query($sql, [$role_id, $data['class'].'_'.$data['method'].'_any']);
-        $is_any = (bool)$stmt->fetchColumn();
-        echo ' is_any = '.$is_any;
+        $is_any = $this->check_any($db, $sql, $role_id, $data);
 
         if(!$is_any) {
-            $stmt = $db->query($sql, [$role_id, $data['class'].'_'.$data['method'].'_own']);
-            $is_own = (bool)$stmt->fetchColumn();
-            echo ' is_own = ' . $is_own;
+            $is_own = $this->check_own($db, $sql, $role_id, $data);
 
             if (!$is_own) {
                 echo ' You have no right to do this!!! ';

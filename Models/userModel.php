@@ -184,13 +184,13 @@ class userModel extends Model
                 $stmt = $db->query($sql, [$login]);
                 $id = $stmt->fetchColumn();
 
-                $sql = 'SELECT ACL_id FROM users WHERE login = ?';
+                $sql = 'SELECT role_id FROM users WHERE login = ?';
                 $stmt = $db->query($sql, [$login]);
-                $ACL_id = $stmt->fetchColumn();
+                $role_id = $stmt->fetchColumn();
 
                 $_SESSION['user_id'] = $id;
                 $_SESSION['user_login'] = $login;
-                $_SESSION['user_acl'] = $ACL_id;
+                $_SESSION['user_acl'] = $role_id;
                 header('location: http://testlinkshare.com/user/index/');
             } else {
                 $_SESSION['error'] = 'You are not activate yet!!! Please, check your mail!!!';

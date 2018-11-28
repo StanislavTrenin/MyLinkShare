@@ -7,13 +7,13 @@ class App
         $request = new Request();
 
         $route = new Route($request);
-        $rez = $route->route();
+        $result = $route->route();
 
         $ACL = new ACL();
-        if($ACL->check($rez) == 1){
+        if($ACL->check($result) == 1){
             require_once '../Views/Access/denied.php';
         } else {
-            return $this->call($rez);
+            return $this->call($result);
         }
     }
 
