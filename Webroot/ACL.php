@@ -18,19 +18,20 @@ class ACL{
         }
         echo ' role_id = '.$role_id;
 
-        $sql = 'SELECT count(*) FROM ACL WHERE role_id = ? AND class = ? AND method = ? AND rule = ?';
+        $sql = 'SELECT count(*) FROM ACL WHERE role_id = ? AND rule = ?';
 
-        $stmt = $db->query($sql, [$role_id, $data['class'], $data['method'], 'any']);
+        $stmt = $db->query($sql, [$role_id, $data['class'].'_'.$data['method'].'_any']);
         $is_any = (bool)$stmt->fetchColumn();
         echo ' is_any = '.$is_any;
 
         if(!$is_any) {
-            $stmt = $db->query($sql, [$role_id, $data['class'], $data['method'], 'own']);
+            $stmt = $db->query($sql, [$role_id, $data['class'].'_'.$data['method'].'_own']);
             $is_own = (bool)$stmt->fetchColumn();
             echo ' is_own = ' . $is_own;
 
             if (!$is_own) {
                 echo ' You have no right to do this!!! ';
+                return 1;
 
             } else {
                 $size = count($data['params']);
@@ -46,13 +47,16 @@ class ACL{
 
                 if ($_SESSION['user_id'] == $author_id) {
                     echo ' You have all right to do this!!! ';
+                    return 0;
                 } else {
-                    echo ' You have no   right to do this!!! ';
+                    echo ' You have no right to do this!!! ';
+                    return 1;
                 }
             }
 
         } else {
             echo ' You have all right to do this!!! ';
+            return 0;
         }
 
     }

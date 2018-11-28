@@ -177,12 +177,12 @@ class linkModel extends Model
         }
     }
 
-    function delete($id)
+    function delete($id, $user_id)
     {
         $db = new Database();
         $sql = 'DELETE FROM links WHERE link_id =?';
         $stmt = $db->query($sql, [$id]);
-        header('location: http://testlinkshare.com/link/index/'.$id.'/1');
+        header('location: http://testlinkshare.com/link/index/'.$user_id.'/1');
     }
 
 

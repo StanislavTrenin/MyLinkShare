@@ -15,6 +15,8 @@ spl_autoload_register(function ($class_name) {
         require_once('../Models/' . $class_name . 'Model.php');
     }
 
+
+
 });
 
 class Boot
@@ -31,6 +33,7 @@ class Boot
 
         require_once '../Views/View.php';
         require_once '../Views/Layout/default.php';
+        //require_once '../Views/Layout/denied.php';
 
         require_once '../Route.php';
         require_once '../Request.php';

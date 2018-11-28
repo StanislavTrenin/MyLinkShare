@@ -8,13 +8,14 @@
 
                 <h2><?php echo 'Hello '.$_SESSION['user_login'].'!'; ?></h2>
 
-                <form action = "http://testlinkshare.com/link/create/<?php echo $_SESSION['user_id']?>" method = "post">
+                <form action = "http://testlinkshare.com/link/create/<?php echo $_SESSION['user_id']?>/" method = "post">
                     <input type = "submit" name = "submit" value = " Create new link "/>
                 </form>
             <?php endif; ?>
 
             <?php if (isset($links)): ?>
                 <?php foreach($links as $link):?>
+
                     <?php if ( (!$link['privacy']) || ($_SESSION['user_id'] == $link['author_id'])): ?>
 
 
@@ -27,9 +28,7 @@
                                 <input type = "submit" name = "submit" value = "Edit"/>
                             </form>
 
-
                             <input type="button" name="btn" value="Delete" id="submitBtn" data-toggle="modal" data-target="#confirm-submit" class="btn btn-primary" /><br/>
-
                             <div class="modal fade" id="confirm-submit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -42,6 +41,7 @@
 
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+
                                             <a href="http://testlinkshare.com/link/delete/<?php echo $link['link_id']?>" id="submit" class="btn btn-primary">Delete</a>
                                         </div>
                                     </div>

@@ -32,19 +32,19 @@
                 <?php endif; ?>
 
                 <?php if (isset($_SESSION['user_login'])):  ?>
-                    <form action = "http://testlinkshare.com/user/editSelf/<?php echo $_SESSION['user_id']?>" method = "post">
+                    <form action = "http://testlinkshare.com/user/editSelf/<?php echo $_SESSION['user_id']?>/" method = "post">
                         <input type = "submit" name = "edit" value = "Edit profile"/>
                     </form>
                 <?php endif; ?>
 
                 <?php if (isset($_SESSION['user_login'])):  ?>
-                    <form action = "http://testlinkshare.com/user/view/<?php echo $_SESSION['user_id']?>" method = "post">
+                    <form action = "http://testlinkshare.com/user/view/<?php echo $_SESSION['user_id']?>/" method = "post">
                         <input type = "submit" name = "viewUsers" value = "View list of users"/>
                     </form>
                 <?php endif; ?>
 
                 <?php if (isset($_SESSION['user_login'])):  ?>
-                    <form action = "http://testlinkshare.com/user/logout/" method = "post">
+                    <form action = "http://testlinkshare.com/user/logout/<?php echo $_SESSION['user_id']?>/" method = "post">
                         <input type = "submit" name = "logout" value = "Log out "/>
                     </form>
                 <?php endif; ?>

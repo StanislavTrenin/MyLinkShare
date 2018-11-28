@@ -10,8 +10,11 @@ class App
         $rez = $route->route();
 
         $ACL = new ACL();
-        $ACL->check($rez);
-        return $this->call($rez);
+        if($ACL->check($rez) == 1){
+            require_once '../Views/Access/denied.php';
+        } else {
+            return $this->call($rez);
+        }
     }
 
     function call($data = array())
