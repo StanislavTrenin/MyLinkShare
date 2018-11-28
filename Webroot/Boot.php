@@ -61,6 +61,11 @@ class Boot
         //echo 'secret = '.Config::SECRET.' ';
     }
 
+    public function loadACL()
+    {
+        require_once 'ACL.php';
+    }
+
 
 }
 ?>

@@ -7,6 +7,7 @@ $boot->loadCore();
 $boot->loadDatabase();
 $boot->loadPhPMailer();
 $boot->loadConfig();
+$boot->loadACL();
 
 global $config;
 
