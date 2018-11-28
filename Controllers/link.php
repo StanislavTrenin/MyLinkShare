@@ -7,12 +7,12 @@ class link extends Controller
         //echo 'id = '.$id.' page = '.$page;
         $link_model = $this->model('linkModel');
 
-        $page_info = $link_model->definePages($id, $page, 0);
+        $page_info = $link_model->definePages($id, $page, 0, $_SESSION['user_acl']);
         //$last = round($count / $perpage) - 1;
 
 
         $view = new View('../Views/Link/view.php',
-            ['links' => $link_model->index($id, $page_info), 'pages' => $page_info, 'method' => 'index']);
+            ['links' => $link_model->index($id, $page_info, $_SESSION['user_acl']), 'pages' => $page_info, 'method' => 'index']);
 
         return $view;
     }
@@ -22,7 +22,7 @@ class link extends Controller
         //id from params, rename
         $link_model = $this->model('linkModel');
 
-        $page_info = $link_model->definePages($id, $page, 1);
+        $page_info = $link_model->definePages($id, $page, 1, $_SESSION['user_acl']);
 
         $view = new View('../Views/Link/view.php',
             ['links' => $link_model->viewByUser($id, $page_info), 'pages' => $page_info, 'method' => 'viewByUser']);

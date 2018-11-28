@@ -1,7 +1,7 @@
 <?php
 class linkModel extends Model
 {
-    function index($id, $pages)
+    function index($id, $pages, $acl)
     {
         $rez = array();
         $db = new Database();
@@ -21,7 +21,7 @@ class linkModel extends Model
                     $rez[] = $row;
             }
 
-            if($row['privacy'] != 1 || $row['author_id'] == $id) {
+            if($row['privacy'] != 1 || $row['author_id'] == $id || $acl == 2) {
                 $index++;
                 //echo ' index = '.$index. ' post = '.$row['link_id'];
             }
@@ -64,11 +64,12 @@ class linkModel extends Model
         return $stmt;
     }
 
-    function definePages($id, $curpage, $all)
+    function definePages($id, $curpage, $all, $acl)
     {
+
         $db = new Database();
 
-        if($all == 0) {
+        if($all == 0 || $acl == 2) {
             $sql = 'SELECT count(*) FROM links';
             $stmt = $db->query($sql, []);
         } else {
@@ -80,7 +81,7 @@ class linkModel extends Model
         $count = $stmt->fetchColumn();
         //echo ' count = ' . $count;
 
-        if($all == 0) {
+        if($all == 0 && $acl != 2) {
             $sql = 'SELECT count(*) FROM links WHERE author_id != ? AND privacy = 1';
             $stmt = $db->query($sql, [$id]);
             $private = $stmt->fetchColumn();

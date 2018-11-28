@@ -16,14 +16,14 @@
             <?php if (isset($links)): ?>
                 <?php foreach($links as $link):?>
 
-                    <?php if ( (!$link['privacy']) || ($_SESSION['user_id'] == $link['author_id'])): ?>
+                    <?php if ( (!$link['privacy']) || ($_SESSION['user_id'] == $link['author_id']) || $_SESSION['user_acl'] == 2): ?>
 
 
                         <h4><a href = "http://testlinkshare.com/link/viewLink/<?php echo $link['link_id']?>"><?php echo $link['title']?></a></h4>
                         <?php echo substr($link['description'], 0, 50)?><br/>
                         <?php echo $link['link']?><br/>
 
-                        <?php if ($_SESSION['user_id'] == $link['author_id']): ?>
+                        <?php if ($_SESSION['user_id'] == $link['author_id'] || $_SESSION['user_acl'] == 2): ?>
                             <form action = "http://testlinkshare.com/link/edit/<?php echo $link['link_id']?>" method = "post">
                                 <input type = "submit" name = "submit" value = "Edit"/>
                             </form>

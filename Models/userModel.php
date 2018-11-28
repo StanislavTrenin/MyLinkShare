@@ -184,8 +184,13 @@ class userModel extends Model
                 $stmt = $db->query($sql, [$login]);
                 $id = $stmt->fetchColumn();
 
+                $sql = 'SELECT ACL_id FROM users WHERE login = ?';
+                $stmt = $db->query($sql, [$login]);
+                $ACL_id = $stmt->fetchColumn();
+
                 $_SESSION['user_id'] = $id;
                 $_SESSION['user_login'] = $login;
+                $_SESSION['user_acl'] = $ACL_id;
                 header('location: http://testlinkshare.com/user/index/');
             } else {
                 $_SESSION['error'] = 'You are not activate yet!!! Please, check your mail!!!';
@@ -199,7 +204,8 @@ class userModel extends Model
 
     public function logout() {
         unset($_SESSION['user_id']);
-        unset($_SESSION['user_login ']);
+        unset($_SESSION['user_login']);
+        unset($_SESSION['user_acl']);
         if(session_destroy()) {
             header('location: http://testlinkshare.com/user/index/');
         }
