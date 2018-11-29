@@ -1,7 +1,7 @@
 <?php
 class linkModel extends Model
 {
-    function index($id, $pages, $acl)
+    function index($id, $pages)
     {
         $rez = array();
         $db = new Database();
@@ -21,7 +21,7 @@ class linkModel extends Model
                     $rez[] = $row;
             }
 
-            if($row['privacy'] != 1 || $row['author_id'] == $id || $acl == 2) {
+            if($row['privacy'] != 1 || $row['author_id'] == $id || ACL::check(['class' => 'link', 'method' => 'viewPrivate', 'params' => [0]])) {
                 $index++;
                 //echo ' index = '.$index. ' post = '.$row['link_id'];
             }
@@ -64,12 +64,12 @@ class linkModel extends Model
         return $stmt;
     }
 
-    function definePages($id, $curpage, $all, $acl)
+    function definePages($id, $curpage, $all)
     {
 
         $db = new Database();
 
-        if($all == 0 || $acl == 2) {
+        if($all == 0 || ACL::check(['class' => 'link', 'method' => 'viewPrivate', 'params' => [0]])) {
             $sql = 'SELECT count(*) FROM links';
             $stmt = $db->query($sql, []);
         } else {
@@ -81,7 +81,7 @@ class linkModel extends Model
         $count = $stmt->fetchColumn();
         //echo ' count = ' . $count;
 
-        if($all == 0 && $acl != 2) {
+        if($all == 0 && !ACL::check(['class' => 'link', 'method' => 'viewPrivate', 'params' => [0]])) {
             $sql = 'SELECT count(*) FROM links WHERE author_id != ? AND privacy = 1';
             $stmt = $db->query($sql, [$id]);
             $private = $stmt->fetchColumn();

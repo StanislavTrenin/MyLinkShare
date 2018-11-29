@@ -9,11 +9,11 @@ class App
         $route = new Route($request);
         $result = $route->route();
 
-        $ACL = new ACL();
-        if($ACL->check($result) == 1){
-            require_once '../Views/Access/denied.php';
-        } else {
+
+        if(ACL::check($result)){
             return $this->call($result);
+        } else {
+            require_once '../Views/Access/denied.php';
         }
     }
 

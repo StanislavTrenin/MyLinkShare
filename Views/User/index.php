@@ -9,13 +9,14 @@
             <?php endif; ?>
 
             <div class="mx-auto" style="width: 200px;">
-                <?php if (!isset($_SESSION['user_login'])):  ?>
+
+                <?php if (ACL::check(['class' => 'user', 'method' => 'create', 'params' => []])):  ?>
                     <form action = "http://testlinkshare.com/user/create/" method = "post">
                         <input type = "submit" name = "create" value = " Create new user "/>
                     </form>
                 <?php endif; ?>
 
-                <?php if (!isset($_SESSION['user_login'])):  ?>
+                <?php if (ACL::check(['class' => 'user', 'method' => 'login', 'params' => []])):  ?>
                     <form action = "http://testlinkshare.com/user/login/" method = "post">
                         <input type = "submit" name = "login" value = "Log in"/>
                     </form>
@@ -25,25 +26,25 @@
                     <input type = "submit" name = "view" value = "View links"/>
                 </form>
 
-                <?php if (isset($_SESSION['user_login'])):  ?>
+                <?php if (ACL::check(['class' => 'link', 'method' => 'viewByUser', 'params' => [$_SESSION['user_id'], 1]])):  ?>
                     <form action = "http://testlinkshare.com/link/viewByUser/<?php echo $_SESSION['user_id']?>/1" method = "post">
                         <input type = "submit" name = "viewByUser" value = "View you own links"/>
                     </form>
                 <?php endif; ?>
 
-                <?php if (isset($_SESSION['user_login'])):  ?>
+                <?php if (ACL::check(['class' => 'user', 'method' => 'editSelf', 'params' => [$_SESSION['user_id'], 0]])):  ?>
                     <form action = "http://testlinkshare.com/user/editSelf/<?php echo $_SESSION['user_id']?>/" method = "post">
                         <input type = "submit" name = "edit" value = "Edit profile"/>
                     </form>
                 <?php endif; ?>
 
-                <?php if (isset($_SESSION['user_login'])):  ?>
+                <?php if (ACL::check(['class' => 'user', 'method' => 'view', 'params' => [$_SESSION['user_id'], 0]])):  ?>
                     <form action = "http://testlinkshare.com/user/view/<?php echo $_SESSION['user_id']?>/" method = "post">
                         <input type = "submit" name = "viewUsers" value = "View list of users"/>
                     </form>
                 <?php endif; ?>
 
-                <?php if (isset($_SESSION['user_login'])):  ?>
+                <?php if (ACL::check(['class' => 'user', 'method' => 'logout', 'params' => [$_SESSION['user_id'], 0]])):  ?>
                     <form action = "http://testlinkshare.com/user/logout/<?php echo $_SESSION['user_id']?>/" method = "post">
                         <input type = "submit" name = "logout" value = "Log out "/>
                     </form>
