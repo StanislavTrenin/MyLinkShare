@@ -35,7 +35,8 @@ class user extends Controller
         {
             $user_model->edit($id, $_POST['login'], $_POST['mail'],
                 $_POST['password'], $_POST['confirm'],
-                $_POST['first_name'], $_POST['second_name']);
+                $_POST['first_name'], $_POST['second_name']
+                , $_POST['active'], $_POST['role_id']);
         }
         $view = new View('../Views/User/editSelf.php', ['users' => $user_model->viewUser($id)]);
         //only name no path

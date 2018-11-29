@@ -106,8 +106,11 @@ class userModel extends Model
         return $stmt;
     }
 
-    function edit($id, $login, $mail, $password, $confirm, $first_name, $second_name){
+    function edit($id, $login, $mail, $password, $confirm, $first_name, $second_name, $active, $role_id){
         $db = new Database();
+
+        if(isset($active)) { echo ' active = '.$active; }
+        if(isset($role_id)) { echo ' active = '.$role; }
 
         if($password == '')
         {
@@ -146,6 +149,26 @@ class userModel extends Model
  first_name = ?, second_name = ? WHERE user_id = ?';
                 $stmt = $db->query($sql,
                     [$login, $mail, $newpassword, $first_name, $second_name, $id]);
+
+
+
+                if(ACL::check(['class' => 'user', 'method' => 'activate', 'params' => []])) {
+                    $sql = 'UPDATE users SET active = ? WHERE user_id = ?';
+
+                    if (isset($active)) {
+                        $stmt = $db->query($sql, [1, $id]);
+
+                    } else {
+                        $stmt = $db->query($sql, [0, $id]);
+
+                    }
+
+                    if (isset($role_id)){
+                        $sql = 'UPDATE users SET role_id = ? WHERE user_id = ?';
+                        $stmt = $db->query($sql, [$role_id, $id]);
+                    }
+                }
+
                 header('location: http://testlinkshare.com/user/index/');
             } else {
                 $_SESSION['error'] = 'Fail to confirm password!!!';

@@ -13,7 +13,25 @@
                     <label>Confirm  :</label><input type = "password" name = "confirm" class = "box" /><br/><br />
                     <label>First name  :</label><input type = "text" name = "first_name" class = "box" required value = "<?php echo $user['first_name']?>"/><br/><br />
                     <label>Second name  :</label><input type = "text" name = "second_name" class = "box" required value = "<?php echo $user['second_name']?>"/><br/><br />
-                <?php endforeach; ?>
+
+                    <?php if(ACL::check(['class' => 'user', 'method' => 'activate', 'params' => []])):?>
+                        <?php if(!$user['active']):?>
+                            <label>Active :</label><input type="checkbox" name="active"  /><br/><br />
+                        <?php endif; ?>
+                        <?php if($user['active']):?>
+                            <label>Active :</label><input type="checkbox" name="active" checked='checked'/><br/><br />
+                        <?php endif; ?>
+                    <?php endif; ?>
+
+                    <?php if(ACL::check(['class' => 'user', 'method' => 'changeRole', 'params' => []])):?>
+                        <select name='role_id'>
+                            <option value='1' <?php if($user['role_id'] == 3): echo'selected = select'; endif;?>>User</option>
+                            <option value='2' <?php if($user['role_id'] == 2): echo'selected = select'; endif;?>>Editor</option>
+                            <option value='3' <?php if($user['role_id'] == 3): echo'selected = select'; endif;?>>Admin</option>
+                        </select><br/><br />
+                    <?php endif; ?>
+
+                    <?php endforeach; ?>
             <?php endif; ?>
                 <input type = "submit" name = "submit" value = " Submit "/>
             </form>
