@@ -15,9 +15,9 @@ class Route
         $url = trim($url);
 
         if ($url == '/index.php' || $url == '/') {
-            $class = 'user';
+            $class = 'link';
             $method = 'index';
-            $params = [0];
+            $params = ['',1];
         } else {
             $explode_url = explode('/', $url);
             $explode_url = array_slice($explode_url, 1);

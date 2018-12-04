@@ -26,4 +26,4 @@
     </div>
 
 </div>
-<h2><a href = "<?php echo $_SESSION['previous_page']; ?>">Go back</a></h2>
+<h2><a href = "http://testlinkshare.com/user/index/">Go to main page</a></h2>

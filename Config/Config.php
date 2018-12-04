@@ -5,6 +5,7 @@ $config = [];
 class Config
 {
 
+    //sigleton from ewerywhere
     public function __construct()
     {
 

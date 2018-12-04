@@ -17,16 +17,20 @@ class ACL{
     }
 
 
-    private static function check_any($db, $sql, $role_id, $data = array())
+    private static function check_any($db, $role_id, $data = array())
     {
+        //$db = storage::get('db');
+        //$conf = storage::get('conf');
+        $sql = 'SELECT count(*) FROM ACL WHERE role_id = ? AND rule = ?';
         $stmt = $db->query($sql, [$role_id, $data['class'].'_'.$data['method'].'_any']);
         $is_any = (bool)$stmt->fetchColumn();
         //echo ' is_any = '.$is_any;
         return $is_any;
     }
 
-    private static function check_own($db, $sql, $role_id, $data = array())
+    private static function check_own($db, $role_id, $data = array())
     {
+        $sql = 'SELECT count(*) FROM ACL WHERE role_id = ? AND rule = ?';
         $stmt = $db->query($sql, [$role_id, $data['class'].'_'.$data['method'].'_own']);
         $is_own = (bool)$stmt->fetchColumn();
         //echo ' is_own = ' . $is_own;
@@ -43,12 +47,12 @@ class ACL{
 
         $role_id = ACL::get_role_id($db);
 
-        $sql = 'SELECT count(*) FROM ACL WHERE role_id = ? AND rule = ?';
 
-        $is_any = ACL::check_any($db, $sql, $role_id, $data);
+
+        $is_any = ACL::check_any($db, $role_id, $data);
 
         if(!$is_any) {
-            $is_own = ACL::check_own($db, $sql, $role_id, $data);
+            $is_own = ACL::check_own($db, $role_id, $data);
 
             if (!$is_own) {
                 //echo ' You have no right to do this!!! ';

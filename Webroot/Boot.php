@@ -31,9 +31,7 @@ class Boot
 
         require_once '../Models/Model.php';
 
-        require_once '../Views/View.php';
-        require_once '../Views/Layout/default.php';
-        //require_once '../Views/Layout/denied.php';
+
 
         require_once '../Route.php';
         require_once '../Request.php';
@@ -67,6 +65,13 @@ class Boot
     public function loadACL()
     {
         require_once 'ACL.php';
+    }
+
+    public function loadView()
+    {
+        require_once '../Views/View.php';
+        require_once '../Views/Layout/default.php';
+        //require_once '../Views/Layout/denied.php';
     }
 
 
