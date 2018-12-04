@@ -15,6 +15,7 @@ class App
         } else {
             require_once '../Views/Access/denied.php';
         }
+
     }
 
     function call($data = array())

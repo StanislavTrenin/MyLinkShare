@@ -1,5 +1,5 @@
 <div align = "center">
-    <div style = "width:300px; border: solid 1px #333333; " align = "left">
+    <div style = "width:600px; border: solid 1px #333333; " align = "left">
         <div style = "background-color:#333333; color:#FFFFFF; padding:3px;"><b>Edit profile</b></div>
 
         <div style = "margin:30px">
@@ -33,7 +33,7 @@
 
                     <?php endforeach; ?>
             <?php endif; ?>
-                <input type = "submit" name = "submit" value = " Submit "/>
+                <input type = "submit" name = "submit" class="btn btn-primary" value = " Submit "/>
             </form>
             <?php if (isset($_SESSION['error'])):  ?>
                 <div style = "font-size:11px; color:#cc0000; margin-top:10px">
@@ -46,4 +46,4 @@
     </div>
 
 </div>
-<h2><a href = "http://testlinkshare.com/user/index/">Go back</a></h2>
+<h2><a href = "<?php echo $_SESSION['previous_page']; ?>">Go back</a></h2>

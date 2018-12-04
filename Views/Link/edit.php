@@ -9,7 +9,7 @@
                 <?php foreach($links as $link):?>
                 <form action = "" method = "post">
                     <label>Title  :</label><input type = "text" name = "title" class = "box" value = "<?php echo $link['title']?>" required/><br /><br />
-                    <label>Description :</label><p><textarea rows="10" cols="60" name="description"  required><?php echo $link['description']?></textarea></p><br /><br />
+                    <label>Description :</label><p><textarea rows="10" cols="50" name="description"  required><?php echo $link['description']?></textarea></p><br /><br />
                     <label>Link :</label><input type = "text" name = "link" class = "box" value = "<?php echo $link['link']?>" required/><br/><br />
                     <?php if($link['privacy']):?>
                         <label>Private :</label><input type="checkbox" name="private" checked/><br/><br />
@@ -17,7 +17,7 @@
                     <?php if(!$link['privacy']):?>
                         <label>Private :</label><input type="checkbox" name="private"/><br/><br />
                     <?php endif; ?>
-                    <input type = "submit" name = "edit" value = " Edit "/>
+                    <input type = "submit" name = "edit" class="btn btn-primary" value = " Edit "/>
             </form>
 
                 <?php endforeach; ?>
@@ -34,4 +34,4 @@
     </div>
 
 </div>
-<h2><a href = "http://testlinkshare.com/link/index/<?php echo $_SESSION['user_id']?>/1">Go back</a></h2>
+<h2><a href = "<?php echo $_SESSION['previous_page']; ?>">Go back</a></h2>

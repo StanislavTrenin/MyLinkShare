@@ -1,58 +1,48 @@
 <div align = "center">
-    <div style = "width:300px; border: solid 1px #333333; " align = "left">
+    <div style = "width:600px; border: solid 1px #333333; " align = "left">
+
         <div style = "background-color:#333333; color:#FFFFFF; padding:3px;"><b>Welcome to TestLinkShare</b></div>
 
         <div style = "margin:30px">
-            <?php if (isset($_SESSION['user_login'])):  ?>
+            <div class="jumbotron">
+                <h1 class="display-4">Hello <?php if (isset($_SESSION['user_login'])):  ?><?php echo $_SESSION['user_login']; ?><?php endif; ?>!
+                </h1>
+                <p class="lead">This is a simple website, where you can store and share you links with all World!</p>
+            </div>
 
-                <h2><div><?php echo 'Hello '.$_SESSION['user_login'].'!'; ?></div></h2>
-            <?php endif; ?>
 
             <div class="mx-auto" style="width: 200px;">
 
                 <?php if (ACL::check(['class' => 'user', 'method' => 'create', 'params' => []])):  ?>
-                    <form action = "http://testlinkshare.com/user/create/" method = "post">
-                        <input type = "submit" name = "create" value = " Create new user "/>
-                    </form>
+                <a href="http://testlinkshare.com/user/create/"  id="submit" class="btn btn-primary">Create account</a><br/><br/>
                 <?php endif; ?>
 
                 <?php if (ACL::check(['class' => 'user', 'method' => 'login', 'params' => []])):  ?>
-                    <form action = "http://testlinkshare.com/user/login/" method = "post">
-                        <input type = "submit" name = "login" value = "Log in"/>
-                    </form>
+                    <a href="http://testlinkshare.com/user/login/"  id="submit" class="btn btn-primary">Login</a><br/><br/>
                 <?php endif; ?>
 
-                <form action = "http://testlinkshare.com/link/index/<?php echo $_SESSION['user_id']?>/1" method = "post">
-                    <input type = "submit" name = "view" value = "View links"/>
-                </form>
+                <a href="http://testlinkshare.com/link/index/<?php echo $_SESSION['user_id']?>/1" id="submit" class="btn btn-primary">View links</a><br/><br/>
+
 
                 <?php if (ACL::check(['class' => 'link', 'method' => 'viewByUser', 'params' => [$_SESSION['user_id'], 1]])):  ?>
-                    <form action = "http://testlinkshare.com/link/viewByUser/<?php echo $_SESSION['user_id']?>/1" method = "post">
-                        <input type = "submit" name = "viewByUser" value = "View you own links"/>
-                    </form>
+                    <a href="http://testlinkshare.com/link/viewByUser/<?php echo $_SESSION['user_id']?>/1" id="submit" class="btn btn-primary">View you own links</a><br/><br/>
                 <?php endif; ?>
 
                 <?php if (ACL::check(['class' => 'user', 'method' => 'editSelf', 'params' => [$_SESSION['user_id'], 0]])):  ?>
-                    <form action = "http://testlinkshare.com/user/editSelf/<?php echo $_SESSION['user_id']?>/" method = "post">
-                        <input type = "submit" name = "edit" value = "Edit profile"/>
-                    </form>
+                    <a href="http://testlinkshare.com/user/editSelf/<?php echo $_SESSION['user_id']?>/" id="submit" class="btn btn-primary">Edit profile</a><br/><br/>
                 <?php endif; ?>
 
                 <?php if (ACL::check(['class' => 'user', 'method' => 'view', 'params' => [$_SESSION['user_id'], 0]])):  ?>
-                    <form action = "http://testlinkshare.com/user/view/<?php echo $_SESSION['user_id']?>/" method = "post">
-                        <input type = "submit" name = "viewUsers" value = "View list of users"/>
-                    </form>
+                    <a href="http://testlinkshare.com/user/view/<?php echo $_SESSION['user_id']?>/" id="submit" class="btn btn-primary">View list of users</a><br/><br/>
                 <?php endif; ?>
 
                 <?php if (ACL::check(['class' => 'user', 'method' => 'logout', 'params' => [$_SESSION['user_id'], 0]])):  ?>
-                    <form action = "http://testlinkshare.com/user/logout/<?php echo $_SESSION['user_id']?>/" method = "post">
-                        <input type = "submit" name = "logout" value = "Log out "/>
-                    </form>
+                    <a href="http://testlinkshare.com/user/logout/<?php echo $_SESSION['user_id']?>/" id="submit" class="btn btn-primary">Logout</a><br/><br/>
                 <?php endif; ?>
             </div>
         </div>
 
     </div>
 
-</div>
+</div><br/><br/>
 

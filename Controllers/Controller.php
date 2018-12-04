@@ -6,6 +6,7 @@ class Controller
 
         $this->database = $database;
 
+
     }
 
     /**

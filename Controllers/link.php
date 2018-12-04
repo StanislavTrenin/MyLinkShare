@@ -71,11 +71,11 @@ class link extends Controller
     function delete($id)
     {
         echo 'id to delete = '.$id;
-        /*$link_model = $this->model('linkModel');
+        $link_model = $this->model('linkModel');
         $link_model->delete($id, $_SESSION['user_id']);
         $view = new View('../Views/Link/view.php', []);
         return $view;
-*/
+
     }
 
 }

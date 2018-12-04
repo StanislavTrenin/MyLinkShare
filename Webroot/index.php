@@ -16,6 +16,6 @@ global $config;
 
 $app = new App();
 echo $app->run();
-
+$_SESSION['previous_page'] =  $_SERVER['REQUEST_URI'];
 
 ?>
