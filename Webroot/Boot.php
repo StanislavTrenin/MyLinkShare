@@ -47,20 +47,22 @@ class Boot
 
 
 
+
     public function loadDatabase()
     {
         require_once '../Config/Database.php';
-        $Database = new Database();
+        //$Database = Database::getInstance();
 
     }
 
     public function loadConfig()
     {
-        include '../Config/Config.php';
-        $Config = new Config();
+        require_once '../Config/Config.php';
+        //$Config = new Config();
 
         //echo 'secret = '.Config::SECRET.' ';
     }
+
 
     public function loadACL()
     {

@@ -11,9 +11,10 @@ class userModel extends Model
     {
 
 
-        global $config;
-        $secret = $config['secret'];
-        $db = new Database();
+
+        $config = Config::getInstance();
+        $secret = $config->getData()['secret'];
+        $db = Database::getInstance();
         $newpassword = MD5($password . $login . $secret);
         $password_ok = false;
 
@@ -43,8 +44,8 @@ class userModel extends Model
                 $stmt = $db->query($sql, [$login]);
                 $id = $stmt->fetchColumn();
 
-                global $config;
-                $secret = $config['secret'];
+                $config = Config::getInstance();
+                $secret = $config->getData()['secret'];
 
                 $hash = MD5($mail.$login.$secret);
                 $sql = 'INSERT INTO confirmation (time, hash) VALUES (?, ?)';
@@ -99,7 +100,7 @@ class userModel extends Model
 
     function viewUser($id)
     {
-        $db = new Database();
+        $db = Database::getInstance();
         $sql = 'SELECT * FROM users WHERE user_id = ?';
         $stmt = $db->query($sql, [$id]);
 
@@ -107,10 +108,10 @@ class userModel extends Model
     }
 
     function edit($id, $login, $mail, $password, $confirm, $first_name, $second_name, $active, $role_id){
-        $db = new Database();
+        $db = Database::getInstance();
 
-        if(isset($active)) { echo ' active = '.$active; }
-        if(isset($role_id)) { echo ' active = '.$role; }
+        //if(isset($active)) { echo ' active = '.$active; }
+        //if(isset($role_id)) { echo ' active = '.$role; }
 
         if($password == '')
         {
@@ -122,8 +123,8 @@ class userModel extends Model
         }
 
         else {
-            global $config;
-            $secret = $config['secret'];
+            $config = Config::getInstance();
+            $secret = $config->getData()['secret'];
             $newpassword = MD5($password . $login . $secret);
             $password_ok = false;
 
@@ -186,10 +187,10 @@ class userModel extends Model
 
     public function login($login, $password) {
 
-        global $config;
-        $secret = $config['secret'];
+        $config = Config::getInstance();
+        $secret = $config->getData()['secret'];
 
-        $db = new Database();
+        $db = Database::getInstance();
         $newpassword = MD5($password.$login.$secret);
 
 
@@ -237,9 +238,9 @@ class userModel extends Model
 
     function verify($id, $mail, $login, $hash)
     {
-        $db = new Database();
-        global $config;
-        $secret = $config['secret'];
+        $db = Database::getInstance();
+        $config = Config::getInstance();
+        $secret = $config->getData()['secret'];
         $here = MD5($mail.$login.$secret);
 
         echo 'kek    ';
@@ -258,7 +259,7 @@ class userModel extends Model
 
     function view($id)
     {
-        $db = new Database();
+        $db = Database::getInstance();
         $sql = 'SELECT * FROM users';
         $stmt = $db->query($sql, []);
 
@@ -269,7 +270,7 @@ class userModel extends Model
     function delete($id, $myid)
     {
         echo'id = '.$id.' myid = '.$myid;
-        $db = new Database();
+        $db = Database::getInstance();
         $sql = 'DELETE FROM users WHERE user_id =?';
         $stmt = $db->query($sql, [$id]);
         //header('location: http://testlinkshare.com/user/view/'.$myid);

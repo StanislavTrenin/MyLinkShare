@@ -3,11 +3,12 @@ class user extends Controller
 {
     function index($id)
     {
+        echo 'in controller';
         $user_model = $this->model('userModel');
 
         $view = new View('../Views/User/index.php',
             ['users' => $user_model->index($id)]);
-
+        echo 'in controller';
         return $view;
     }
 

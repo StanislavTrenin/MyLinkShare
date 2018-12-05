@@ -4,7 +4,7 @@ class link extends Controller
     function index($id, $page)
     {
 
-        //echo 'id = '.$id.' page = '.$page;
+        echo 'id = '.$id.' page = '.$page;
         $link_model = $this->model('linkModel');
 
         $page_info = $link_model->definePages($id, $page, 0);

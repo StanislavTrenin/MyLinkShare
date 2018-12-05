@@ -10,7 +10,7 @@ $boot->loadConfig();
 $boot->loadACL();
 $boot->loadView();
 
-global $config;
+//global $config;
 
 
 

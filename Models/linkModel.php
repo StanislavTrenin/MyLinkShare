@@ -4,7 +4,7 @@ class linkModel extends Model
     function index($id, $pages)
     {
         $rez = array();
-        $db = new Database();
+        $db = Database::getInstance();
         $sql = 'SELECT * FROM links';
         $stmt = $db->query($sql, []);
 
@@ -34,7 +34,7 @@ class linkModel extends Model
     function viewByUser($id, $pages)
     {
         $rez = array();
-        $db = new Database();
+        $db = Database::getInstance();
         $sql = 'SELECT * FROM links WHERE author_id = ?';
         $stmt = $db->query($sql, [$id]);
 
@@ -57,7 +57,7 @@ class linkModel extends Model
 
     function viewLink($id)
     {
-        $db = new Database();
+        $db = Database::getInstance();
         $sql = 'SELECT * FROM links WHERE link_id = ?';
         $stmt = $db->query($sql, [$id]);
 
@@ -67,7 +67,9 @@ class linkModel extends Model
     function definePages($id, $curpage, $all)
     {
 
-        $db = new Database();
+        echo 'there!!!';
+        $db = Database::getInstance();
+        $config = Config::getInstance();
 
         if($all == 0 || ACL::check(['class' => 'link', 'method' => 'viewPrivate', 'params' => [0]])) {
             $sql = 'SELECT count(*) FROM links';
@@ -76,7 +78,7 @@ class linkModel extends Model
             $sql = 'SELECT count(*) FROM links WHERE author_id = ?';
             $stmt = $db->query($sql, [$id]);
         }
-
+        echo 'there!!!';
 
         $count = $stmt->fetchColumn();
         //echo ' count = ' . $count;
@@ -88,11 +90,13 @@ class linkModel extends Model
 
             $count -= $private;
         }
+        echo 'there!!!';
 
         //echo ' count = '.$count.' private = '.$private.' id = '.$id;
         $first = 1;
-        global $config;
-        $perpage = $config['perpage'];
+
+        $perpage = $config->getData()['perpage'];
+        echo ' lol = '.$perpage;
         $last = intdiv($count , $perpage);
 
         if($count % $perpage != 0 || $count == 0    ) {
@@ -124,7 +128,7 @@ class linkModel extends Model
 
     function create($author_id, $title, $description, $link, $private)
     {
-        $db = new Database();
+        $db = Database::getInstance();
 
         $sql = 'SELECT count(*) FROM links WHERE author_id = ? AND link = ?';
         $stmt = $db->query($sql, [$author_id, $link]);
@@ -153,7 +157,7 @@ class linkModel extends Model
 
     function edit($author_id, $link_id, $title, $description, $link, $private)
     {
-        $db = new Database();
+        $db = Database::getInstance();
 
         if((bool)$private) {
             $privacy = 1;
@@ -180,7 +184,7 @@ class linkModel extends Model
 
     function delete($id, $user_id)
     {
-        $db = new Database();
+        $db = Database::getInstance();
         $sql = 'DELETE FROM links WHERE link_id =?';
         $stmt = $db->query($sql, [$id]);
         header('location: http://testlinkshare.com/link/index/'.$user_id.'/1');

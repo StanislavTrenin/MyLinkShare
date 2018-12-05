@@ -1,13 +1,13 @@
 <?php
 class ACL{
 
+    private static $db;
 
-
-    private static function get_role_id($db)
+    private static function get_role_id()
     {
         if (isset($_SESSION['user_id'])) {
             $sql = 'SELECT role_id FROM users WHERE user_id = ?';
-            $stmt = $db->query($sql, [$_SESSION['user_id']]);
+            $stmt = self::$db->query($sql, [$_SESSION['user_id']]);
             $role_id = $stmt->fetchColumn();
         } else {
             $role_id = 4;
@@ -16,22 +16,22 @@ class ACL{
         return $role_id;
     }
 
-
-    private static function check_any($db, $role_id, $data = array())
+    private static function check_any($role_id, $data = array())
     {
+
         //$db = storage::get('db');
         //$conf = storage::get('conf');
         $sql = 'SELECT count(*) FROM ACL WHERE role_id = ? AND rule = ?';
-        $stmt = $db->query($sql, [$role_id, $data['class'].'_'.$data['method'].'_any']);
+        $stmt = self::$db->query($sql, [$role_id, $data['class'].'_'.$data['method'].'_any']);
         $is_any = (bool)$stmt->fetchColumn();
         //echo ' is_any = '.$is_any;
         return $is_any;
     }
 
-    private static function check_own($db, $role_id, $data = array())
+    private static function check_own($role_id, $data = array())
     {
         $sql = 'SELECT count(*) FROM ACL WHERE role_id = ? AND rule = ?';
-        $stmt = $db->query($sql, [$role_id, $data['class'].'_'.$data['method'].'_own']);
+        $stmt = self::$db->query($sql, [$role_id, $data['class'].'_'.$data['method'].'_own']);
         $is_own = (bool)$stmt->fetchColumn();
         //echo ' is_own = ' . $is_own;
         return $is_own;
@@ -39,20 +39,23 @@ class ACL{
 
     public static function check($data = array())
     {
-        $db = new Database();
+
+        self::$db = Database::getInstance();
+        //$instance = Database::getInstance();
+        //$db = $instance->getConnection();
+        //$db = Database::getInstance();
+        //echo ' secret = '.Config::getInstance()['secret'];
 
         /*foreach ($data['params'] as $dat){
             echo ' params_there = '.$dat;
         }*/
 
-        $role_id = ACL::get_role_id($db);
+        $role_id = ACL::get_role_id();
 
-
-
-        $is_any = ACL::check_any($db, $role_id, $data);
+        $is_any = ACL::check_any($role_id, $data);
 
         if(!$is_any) {
-            $is_own = ACL::check_own($db, $role_id, $data);
+            $is_own = ACL::check_own($role_id, $data);
 
             if (!$is_own) {
                 //echo ' You have no right to do this!!! ';
@@ -66,7 +69,7 @@ class ACL{
                 } else {
                     $sql = 'SELECT author_id FROM links WHERE link_id = ?';
 
-                    $stmt = $db->query($sql, [$data['params'][0]]);
+                    $stmt = self::$db->query($sql, [$data['params'][0]]);
                     $author_id = $stmt->fetchColumn();
                 }
 
