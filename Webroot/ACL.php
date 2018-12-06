@@ -3,7 +3,7 @@ class ACL{
 
     private static $db;
 
-    private static function get_role_id()
+    public static function get_role_id()
     {
         if (isset($_SESSION['user_id'])) {
             $sql = 'SELECT role_id FROM users WHERE user_id = ?';
@@ -16,7 +16,7 @@ class ACL{
         return $role_id;
     }
 
-    private static function check_any($role_id, $data = array())
+    public static function check_any($role_id, $data = array())
     {
 
         //$db = storage::get('db');
@@ -28,7 +28,7 @@ class ACL{
         return $is_any;
     }
 
-    private static function check_own($role_id, $data = array())
+    public static function check_own($role_id, $data = array())
     {
         $sql = 'SELECT count(*) FROM ACL WHERE role_id = ? AND rule = ?';
         $stmt = self::$db->query($sql, [$role_id, $data['class'].'_'.$data['method'].'_own']);
@@ -64,15 +64,29 @@ class ACL{
             } else {
                 $size = count($data['params']);
                 //echo' size = '.$size;
-                if($size > 1) {
+                /*if($size > 1) {
                     $author_id = $data['params'][0];
                 } else {
                     $sql = 'SELECT author_id FROM links WHERE link_id = ?';
 
                     $stmt = self::$db->query($sql, [$data['params'][0]]);
                     $author_id = $stmt->fetchColumn();
+                }*/
+
+                if($data['class'] == 'user' || $data['method'] == 'viewByUser' || $data['method'] == 'create') {
+                    $author_id = $data['params'][0];
+                    //echo ' there';
+                } else {
+
+                    if ($data['class'] == 'link') {
+                        $sql = 'SELECT author_id FROM links WHERE link_id = ?';
+
+                        $stmt = self::$db->query($sql, [$data['params'][0]]);
+                        $author_id = $stmt->fetchColumn();
+                    }
                 }
 
+                //echo ' author = '.$author_id;
                 if ($_SESSION['user_id'] == $author_id) {
                     //echo ' You have all right to do this!!! ';
                     return true;

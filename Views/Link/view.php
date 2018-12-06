@@ -4,35 +4,42 @@
 
         <div style = "margin:30px">
 
-            <?php if (ACL::check(['class' => 'link', 'method' => 'create', 'params' => [$_SESSION['user_id'], 0]])):  ?>
 
                 <div class="jumbotron">
                     <h1 class="display-4">Hello <?php if (isset($_SESSION['user_login'])):  ?><?php echo $_SESSION['user_login']; ?><?php endif; ?>!
                     </h1>
                     <p class="lead">This is a simple website, where you can store and share you links with all World!</p>
+                    <?php if (ACL::check(['class' => 'link', 'method' => 'create', 'params' => [$_SESSION['user_id'], 0]])):  ?>
                     <p class="lead">
-                        <a href=http://testlinkshare.com/link/create/<?php echo $_SESSION['user_id']?>/" id="submit" class="btn btn-primary">Create new link</a>
+                        <a href="http://testlinkshare.com/link/create/<?php echo $_SESSION['user_id']?>/" id="submit" class="btn btn-primary">Create new link</a>
                     </p>
+                    <?php endif; ?>
                 </div>
-            <?php endif; ?>
 
             <?php if (isset($links)): ?>
                 <?php foreach($links as $link):?>
 
                     <?php if ( (!$link['privacy']) || ($_SESSION['user_id'] == $link['author_id']) || ACL::check(['class' => 'link', 'method' => 'viewPrivate', 'params' => [$link['link_id']]])): ?>
 
+                        <div class="card" style="width: 24rem;">
 
+
+                            <div class="card-header">
                         <h4><a href = "http://testlinkshare.com/link/viewLink/<?php echo $link['link_id']?>"><?php echo $link['title']?></a></h4>
-                        <?php echo substr($link['description'], 0, 50)?><br/>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text"><?php echo substr($link['description'], 0, 50)?></p><br/>
                         <?php echo $link['link']?><br/>
 
+                                <div class="row">
+                                    <div class="btn-group mr-2" role="group" aria-label="First group">
                         <?php if ($_SESSION['user_id'] == $link['author_id'] || ACL::check(['class' => 'link', 'method' => 'edit', 'params' => [$link['link_id']]])): ?>
-                            <form action = "http://testlinkshare.com/link/edit/<?php echo $link['link_id']?>" method = "post">
-                                <input type = "submit" name = "submit" class="btn btn-primary" value = "Edit"/>
-                            </form>
-                        <?php endif; ?>
+                            <a href=http://testlinkshare.com/link/edit/<?php echo $link['link_id']?> id="submit" class="btn btn-primary">Edit link</a>
 
-                        <?php if ($_SESSION['user_id'] == $link['author_id'] || ACL::check(['class' => 'link', 'method' => 'delete', 'params' => [$link['link_id']]])): ?>
+                        <?php endif; ?>
+                                    </div>
+                                    <div class="btn-group mr-2" role="group" aria-label="Second group">
+                                    <?php if ($_SESSION['user_id'] == $link['author_id'] || ACL::check(['class' => 'link', 'method' => 'delete', 'params' => [$link['link_id']]])): ?>
 
                             <button class="btn btn-danger" data-toggle="modal" data-id="<?php echo $link['link_id'] ?>" data-target="#editModal<?php echo $link['link_id'] ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Delete</strong> </button>
                             <div id="editModal<?php echo $link['link_id'] ?>" class="modal fade" role="dialog">
@@ -53,7 +60,10 @@
                             </div>
 
                         <?php endif; ?>
-            <hr size="30" color="blue" ></br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><br/>
                     <?php endif; ?>
                 <?php endforeach; ?>
                 <?php unset($_SESSION['links']); ?>
@@ -63,25 +73,25 @@
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
                     <?php if($pages['page'] != $pages['first']):?>
-                        <li class="page-item"><a class="page-link" href = "http://testlinkshare.com/link/<?php echo $method; ?>/<?php echo $_SESSION['user_id']?>/<?php echo $pages['first']?>"><<</a></li>
+                        <li class="page-item"><a class="page-link" href = "http://testlinkshare.com/link/<?php echo $method; ?><?php if($method == 'viewByUser'): echo '/'.$_SESSION['user_id']; endif;?>/<?php echo $pages['first']?>"><i class="fas fa-angle-double-left"></i></a></li>
                     <?php endif; ?>
                     <?php if($pages['page'] >= 3):?>
-                        <li class="page-item"><a class="page-link" href = "http://testlinkshare.com/link/<?php echo $method; ?>/<?php echo $_SESSION['user_id']?>/<?php echo $pages['pprev']?>"><?php echo $pages['pprev']?></a></li>
+                        <li class="page-item"><a class="page-link" href = "http://testlinkshare.com/link/<?php echo $method; ?><?php if($method == 'viewByUser'): echo '/'.$_SESSION['user_id']; endif;?>/<?php echo $pages['pprev']?>"><?php echo $pages['pprev']?></a></li>
                     <?php endif; ?>
                     <?php if($pages['page'] != $pages['first']):?>
-                        <li class="page-item"><a class="page-link" href = "http://testlinkshare.com/link/<?php echo $method; ?>/<?php echo $_SESSION['user_id']?>/<?php echo $pages['prev']?>"><?php echo $pages['prev']?></a></li>
+                        <li class="page-item"><a class="page-link" href = "http://testlinkshare.com/link/<?php echo $method; ?><?php if($method == 'viewByUser'): echo '/'.$_SESSION['user_id']; endif;?>/<?php echo $pages['prev']?>"><?php echo $pages['prev']?></a></li>
                     <?php endif; ?>
 
-                    <li class="page-item"><a class="page-link" href = "http://testlinkshare.com/link/<?php echo $method; ?>/<?php echo $_SESSION['user_id']?>/<?php echo $pages['page']?>"><?php echo $pages['page']?></a></li>
+                    <li class="page-item"><a class="page-link" href = "http://testlinkshare.com/link/<?php echo $method; ?><?php if($method == 'viewByUser'): echo '/'.$_SESSION['user_id']; endif;?>/<?php echo $pages['page']?>"><?php echo $pages['page']?></a></li>
 
                     <?php if($pages['page'] != $pages['last']):?>
-                        <li class="page-item"><a class="page-link" href = "http://testlinkshare.com/link/<?php echo $method; ?>/<?php echo $_SESSION['user_id']?>/<?php echo $pages['next']?>"><?php echo $pages['next']?></a></li>
+                        <li class="page-item"><a class="page-link" href = "http://testlinkshare.com/link/<?php echo $method; ?><?php if($method == 'viewByUser'): echo '/'.$_SESSION['user_id']; endif;?>/<?php echo $pages['next']?>"><?php echo $pages['next']?></a></li>
                     <?php endif; ?>
                     <?php if($pages['page'] <= $pages['last'] - 2):?>
-                        <li class="page-item"><a class="page-link" href = "http://testlinkshare.com/link/<?php echo $method; ?>/<?php echo $_SESSION['user_id']?>/<?php echo $pages['nnext']?>"><?php echo $pages['nnext']?></a></li>
+                        <li class="page-item"><a class="page-link" href = "http://testlinkshare.com/link/<?php echo $method; ?><?php if($method == 'viewByUser'): echo '/'.$_SESSION['user_id']; endif;?>/<?php echo $pages['nnext']?>"><?php echo $pages['nnext']?></a></li>
                     <?php endif; ?>
                     <?php if($pages['page'] != $pages['last']):?>
-                        <li class="page-item"><a class="page-link" href = "http://testlinkshare.com/link/<?php echo $method; ?>/<?php echo $_SESSION['user_id']?>/<?php echo $pages['last']?>">>></a></li>
+                        <li class="page-item"><a class="page-link" href = "http://testlinkshare.com/link/<?php echo $method; ?><?php if($method == 'viewByUser'): echo '/'.$_SESSION['user_id']; endif;?>/<?php echo $pages['last']?>"><i class="fas fa-angle-double-right"></i></a></li>
                     <?php endif; ?>
                 </ul>
             </nav>
@@ -91,8 +101,4 @@
         </div>
 
     </div>
-</div>
-
-
-
-<h2><a href = "http://testlinkshare.com/user/index/">Go back</a></h2>
+</div><br/><br/>

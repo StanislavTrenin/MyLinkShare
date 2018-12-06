@@ -3,7 +3,7 @@
         <div style = "background-color:#333333; color:#FFFFFF; padding:3px;"><b>Welcome to TestLinkShare</b></div>
 
         <div style = "margin:30px; color:#cc0000" >
-            <h1>Access Denied!!!</h1>
+            <h1>404 Pgae not found!!!</h1>
         </div>
 
     </div>

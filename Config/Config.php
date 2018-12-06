@@ -24,7 +24,8 @@ class Config
         //$this->data = 1;
         $this->data =  [
             'secret' => '35onoi2=-7#%g03kl',
-            'perpage' => '3'
+            'perpage' => '3',
+            'main_page' => 'http://testlinkshare.com/link/index/1'
         ];
     }
 

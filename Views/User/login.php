@@ -21,4 +21,5 @@
     </div>
 
 </div>
-<h2><a href = "http://testlinkshare.com/user/index/">Go to main page</a></h2>
+
+<h2><a href = "<?php echo Config::getInstance()->getData()['main_page'];?>">Go to main page</a></h2>

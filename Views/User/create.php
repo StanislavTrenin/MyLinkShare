@@ -1,10 +1,16 @@
 <div align = "center">
     <div style = "width:600px; border: solid 1px #333333; " align = "left">
-        <div style = "background-color:#333333; color:#FFFFFF; padding:3px;"><b>Registration</b></div>
+        <div style = "background-color:#333333; color:#FFFFFF; padding:3px;">
+            <?php if(ACL::get_role_id() == 3): ?>
+                <b>Create user</b>
+            <?php endif; ?>
+            <?php if(ACL::get_role_id() == 4): ?>
+                <b>Registration</b>
+            <?php endif; ?>
+        </div>
 
         <div style = "margin:30px">
 
-            <h1>Create user</h1>
             <form action = "" method = "post">
                 <label>Login name  :</label><input type = "text" name = "login" class = "box" required/><br /><br />
                 <label>Mail address :</label><input type = "text" name = "mail" class = "box" required/><br/><br />
@@ -26,4 +32,5 @@
     </div>
 
 </div>
-<h2><a href = "http://testlinkshare.com/user/index/">Go to main page</a></h2>
+
+<h2><a href = "<?php echo Config::getInstance()->getData()['main_page'];?>">Go to main page</a></h2>

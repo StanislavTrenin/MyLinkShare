@@ -1,9 +1,15 @@
 <?php
 class link extends Controller
 {
-    function index($id, $page)
+    function index($page)
     {
 
+        if(isset($_SESSION['user_id'])) {
+            $id = $_SESSION['user_id'];
+        }
+        else {
+            $id = 0;
+        }
         echo 'id = '.$id.' page = '.$page;
         $link_model = $this->model('linkModel');
 

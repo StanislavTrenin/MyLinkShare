@@ -24,7 +24,7 @@
     </script>
 
 
-
+    <script defer src="https://use.fontawesome.com/releases/v5.5.0/js/all.js" integrity="sha384-GqVMZRt5Gn7tB9D9q7ONtcp4gtHIUEW/yG7h98J7IpE3kpi+srfFyyB/04OV6pG0" crossorigin="anonymous"></script>
 
     <title>TestLinkShare</title>
 
@@ -47,34 +47,38 @@
 </head>
 <body>
 <nav class="navbar fixed-top navbar-light bg-light">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="#"><i class="fas fa-code"></i> Navbar</a>
 
 
     <?php if (ACL::check(['class' => 'user', 'method' => 'create', 'params' => []])):  ?>
-        <a href="http://testlinkshare.com/user/create/"  id="submit" class="nav-item nav-link">Create account</a><br/><br/>
+        <a href="http://testlinkshare.com/user/create/"  id="submit" class="nav-item nav-link"><i class="far fa-id-card"></i> Create account</a><br/><br/>
     <?php endif; ?>
 
     <?php if (ACL::check(['class' => 'user', 'method' => 'login', 'params' => []])):  ?>
-        <a href="http://testlinkshare.com/user/login/"  id="submit" class="nav-item nav-link">Login</a><br/><br/>
+        <a href="http://testlinkshare.com/user/login/"  id="submit" class="nav-item nav-link"><i class="fas fa-user-alt"></i> Login</a><br/><br/>
     <?php endif; ?>
 
-    <a href="http://testlinkshare.com/link/index/<?php echo $_SESSION['user_id']?>/1" id="submit" class="nav-item nav-link">View links</a><br/><br/>
+    <?php if (ACL::check(['class' => 'link', 'method' => 'create', 'params' => [$_SESSION['user_id'], 0]])):  ?>
+        <a href="http://testlinkshare.com/link/create/<?php echo $_SESSION['user_id']?>/" id="submit" class="nav-item nav-link"> <i class="far fa-file"></i> Create new link</a>
+    <?php endif; ?>
+
+    <a href="http://testlinkshare.com/link/index/1" id="submit" class="nav-item nav-link"><i class="far fa-file-alt"></i> View links</a><br/><br/>
 
 
     <?php if (ACL::check(['class' => 'link', 'method' => 'viewByUser', 'params' => [$_SESSION['user_id'], 1]])):  ?>
-        <a href="http://testlinkshare.com/link/viewByUser/<?php echo $_SESSION['user_id']?>/1" id="submit" class="nav-item nav-link">View you own links</a><br/><br/>
+        <a href="http://testlinkshare.com/link/viewByUser/<?php echo $_SESSION['user_id']?>/1" id="submit" class="nav-item nav-link"><i class="fas fa-file-alt"></i> View you own links</a><br/><br/>
     <?php endif; ?>
 
     <?php if (ACL::check(['class' => 'user', 'method' => 'editSelf', 'params' => [$_SESSION['user_id'], 0]])):  ?>
-        <a href="http://testlinkshare.com/user/editSelf/<?php echo $_SESSION['user_id']?>/" id="submit" class="nav-item nav-link">Edit profile</a><br/><br/>
+        <a href="http://testlinkshare.com/user/editSelf/<?php echo $_SESSION['user_id']?>/" id="submit" class="nav-item nav-link"><i class="fas fa-user-edit"></i> Edit profile</a><br/><br/>
     <?php endif; ?>
 
     <?php if (ACL::check(['class' => 'user', 'method' => 'view', 'params' => [$_SESSION['user_id'], 0]])):  ?>
-        <a href="http://testlinkshare.com/user/view/<?php echo $_SESSION['user_id']?>/" id="submit" class="nav-item nav-link">View list of users</a><br/><br/>
+        <a href="http://testlinkshare.com/user/view/<?php echo $_SESSION['user_id']?>/" id="submit" class="nav-item nav-link"><i class="fas fa-user-friends"></i> View list of users</a><br/><br/>
     <?php endif; ?>
 
     <?php if (ACL::check(['class' => 'user', 'method' => 'logout', 'params' => [$_SESSION['user_id'], 0]])):  ?>
-        <a href="http://testlinkshare.com/user/logout/<?php echo $_SESSION['user_id']?>/" id="submit" class="nav-item nav-link">Logout</a><br/><br/>
+        <a href="http://testlinkshare.com/user/logout/<?php echo $_SESSION['user_id']?>/" id="submit" class="nav-item nav-link"><i class="fas fa-door-open"></i> Logout</a><br/><br/>
     <?php endif; ?>
 
 

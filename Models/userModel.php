@@ -30,60 +30,66 @@ class userModel extends Model
         $stmt = $db->query($sql, [$mail]);
         $mail_exist = $stmt->fetchColumn();
 
+        $correct_mail = filter_var($mail, FILTER_VALIDATE_EMAIL);
+
         $user_exist = $login_exist || $mail_exist;
         echo'lol = ';
         if (!$user_exist) {
 
-            if ($password_ok) {
+            if($correct_mail) {
+                if ($password_ok) {
 
-                $sql = 'INSERT INTO users (login, mail, password, first_name,
+                    $sql = 'INSERT INTO users (login, mail, password, first_name,
  second_name, active) VALUES (?, ?, ?, ?, ?, ?)';
-                $stmt = $db->query($sql, [$login, $mail, $newpassword,
-                    $first_name, $second_name, 0]);
-                $sql = 'SELECT user_id FROM users WHERE login = ?';
-                $stmt = $db->query($sql, [$login]);
-                $id = $stmt->fetchColumn();
+                    $stmt = $db->query($sql, [$login, $mail, $newpassword,
+                        $first_name, $second_name, 0]);
+                    $sql = 'SELECT user_id FROM users WHERE login = ?';
+                    $stmt = $db->query($sql, [$login]);
+                    $id = $stmt->fetchColumn();
 
-                $config = Config::getInstance();
-                $secret = $config->getData()['secret'];
+                    $config = Config::getInstance();
+                    $secret = $config->getData()['secret'];
 
-                $hash = MD5($mail.$login.$secret);
-                $sql = 'INSERT INTO confirmation (time, hash) VALUES (?, ?)';
-                $stmt = $db->query($sql, [date('Y-m-d G:i:s'), $hash]);
-                $link = 'http://testlinkshare.com/user/verify/' .$id.'/'. $mail . '/' . $login . '/'.$hash;
+                    $hash = MD5($mail . $login . $secret);
+                    $sql = 'INSERT INTO confirmation (time, hash) VALUES (?, ?)';
+                    $stmt = $db->query($sql, [date('Y-m-d G:i:s'), $hash]);
+                    $link = 'http://testlinkshare.com/user/verify/' . $id . '/' . $mail . '/' . $login . '/' . $hash;
 
-                $mymail = new PHPMailer\PHPMailer\PHPMailer();
-                $mymail->IsSMTP(); // enable SMTP
+                    $mymail = new PHPMailer\PHPMailer\PHPMailer();
+                    $mymail->IsSMTP(); // enable SMTP
 
-                $sql = 'SELECT pswd FROM psw';
-                $stmt = $db->query($sql, []);
-                $pswd = $stmt->fetchColumn();
+                    $sql = 'SELECT pswd FROM psw';
+                    $stmt = $db->query($sql, []);
+                    $pswd = $stmt->fetchColumn();
 
-                echo'pswd = '.$pswd;
+                    echo 'pswd = ' . $pswd;
 
-                $mymail->SMTPDebug = 0; // debugging: 1 = errors and messages, 2 = messages only
-                $mymail->SMTPAuth = true; // authentication enabled
-                $mymail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for Gmail
-                $mymail->Host = 'smtp.gmail.com';
-                $mymail->Port = 465; // or 587
-                $mymail->IsHTML(true);
-                $mymail->Username = 'strenin25@gmail.com';
-                $mymail->Password = $pswd;
-                $mymail->SetFrom('strenin25@gmail.com');
-                $mymail->Subject = 'Test';
-                $mymail->Body = 'Link to verify you account '.$link;
-                $mymail->AddAddress($mail);
+                    $mymail->SMTPDebug = 0; // debugging: 1 = errors and messages, 2 = messages only
+                    $mymail->SMTPAuth = true; // authentication enabled
+                    $mymail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for Gmail
+                    $mymail->Host = 'smtp.gmail.com';
+                    $mymail->Port = 465; // or 587
+                    $mymail->IsHTML(true);
+                    $mymail->Username = 'strenin25@gmail.com';
+                    $mymail->Password = $pswd;
+                    $mymail->SetFrom('strenin25@gmail.com');
+                    $mymail->Subject = 'Test';
+                    $mymail->Body = 'Link to verify you account ' . $link;
+                    $mymail->AddAddress($mail);
 
-                if(!$mymail->Send()) {
-                    echo 'Mailer Error: ' . $mymail->ErrorInfo;
+                    if (!$mymail->Send()) {
+                        echo 'Mailer Error: ' . $mymail->ErrorInfo;
+                    } else {
+                        echo 'Message has been sent';
+                    }
+
+
+                    //header('location: http://testlinkshare.com/user/index/');
                 } else {
-                    echo 'Message has been sent';
+                    $_SESSION['error'] = 'Fail to confirm password!!!';
                 }
-
-
-                //header('location: http://testlinkshare.com/user/index/');
             } else {
-                $_SESSION['error'] = 'Fail to confirm password!!!';
+                $_SESSION['error'] = 'Incorrect mail!!!';
             }
         } else {
             if ($login_exist) {
@@ -170,7 +176,7 @@ class userModel extends Model
                     }
                 }
 
-                header('location: http://testlinkshare.com/user/index/');
+                header('location: '.Config::getInstance()->getData()['main_page']);
             } else {
                 $_SESSION['error'] = 'Fail to confirm password!!!';
             }
@@ -215,7 +221,7 @@ class userModel extends Model
                 $_SESSION['user_id'] = $id;
                 $_SESSION['user_login'] = $login;
                 $_SESSION['user_acl'] = $role_id;
-                header('location: http://testlinkshare.com/user/index/');
+                header('location:'.$config->getData()['main_page']);
             } else {
                 $_SESSION['error'] = 'You are not activate yet!!! Please, check your mail!!!';
             }
@@ -231,7 +237,7 @@ class userModel extends Model
         unset($_SESSION['user_login']);
         unset($_SESSION['user_acl']);
         if(session_destroy()) {
-            header('location: http://testlinkshare.com/user/index/');
+            header('location:'.Config::getInstance()->getData()['main_page']);
         }
 
     }

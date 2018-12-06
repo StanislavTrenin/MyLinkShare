@@ -24,14 +24,37 @@
                         <?php echo $link['description']?><br/>
                         <?php echo $link['link']?><br/>
 
-                        <?php if ($_SESSION['user_id'] == $link['author_id']): ?>
-                            <form action = "http://testlinkshare.com/link/edit/<?php echo $link['link_id']?>" method = "post">
-                                <input type = "submit" name = "submit" value = "Edit"/>
-                            </form>
-                            <form action = "" method = "post">
-                                <input type = "submit" name = "submit" value = "Delete"/>
-                            </form>
-                        <?php endif; ?><br/>
+            <div class="row">
+                <div class="btn-group mr-2" role="group" aria-label="First group">
+                        <?php if ($_SESSION['user_id'] == $link['author_id'] || ACL::check(['class' => 'link', 'method' => 'edit', 'params' => [$link['link_id']]])): ?>
+                            <a href=http://testlinkshare.com/link/edit/<?php echo $link['link_id']?> id="submit" class="btn btn-primary">Edit link</a>
+
+                        <?php endif; ?>
+                </div>
+                <div class="btn-group mr-2" role="group" aria-label="Second group">
+                        <?php if ($_SESSION['user_id'] == $link['author_id'] || ACL::check(['class' => 'link', 'method' => 'delete', 'params' => [$link['link_id']]])): ?>
+
+                            <button class="btn btn-danger" data-toggle="modal" data-id="<?php echo $link['link_id'] ?>" data-target="#editModal<?php echo $link['link_id'] ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Delete</strong> </button>
+                            <div id="editModal<?php echo $link['link_id'] ?>" class="modal fade" role="dialog">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+
+                                        </div>
+                                        <div class="modal-body">
+                                            <h4 class="modal-title">Are You really want to delete this link?</h4><br>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                            <a href="http://testlinkshare.com/link/delete/<?php echo $link['link_id']?>" id="submit" class="btn btn-primary">Delete</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        <?php endif; ?>
+                </div>
+            </div>
 
 
 
@@ -47,4 +70,4 @@
     </div>
 
 </div>
-<h2><a href = "<?php echo $_SESSION['previous_page']; ?>">Go back</a></h2>
+<h2><a href = "<?php echo Config::getInstance()->getData()['main_page'];?>">Go to main page</a></h2>

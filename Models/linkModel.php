@@ -71,7 +71,7 @@ class linkModel extends Model
         $db = Database::getInstance();
         $config = Config::getInstance();
 
-        if($all == 0 || ACL::check(['class' => 'link', 'method' => 'viewPrivate', 'params' => [0]])) {
+        if($all == 0) {
             $sql = 'SELECT count(*) FROM links';
             $stmt = $db->query($sql, []);
         } else {
@@ -83,16 +83,18 @@ class linkModel extends Model
         $count = $stmt->fetchColumn();
         //echo ' count = ' . $count;
 
-        if($all == 0 && !ACL::check(['class' => 'link', 'method' => 'viewPrivate', 'params' => [0]])) {
-            $sql = 'SELECT count(*) FROM links WHERE author_id != ? AND privacy = 1';
-            $stmt = $db->query($sql, [$id]);
+        if($all == 0 && !ACL::check_any(ACL::get_role_id(), ['class' => 'link', 'method' => 'viewPrivate', 'params' => []])) {
+            echo 'remove private for '.$id;
+                $sql = 'SELECT count(*) FROM links WHERE author_id != ? AND privacy = ?';
+
+            $stmt = $db->query($sql, [$id, 1]);
             $private = $stmt->fetchColumn();
 
             $count -= $private;
         }
         echo 'there!!!';
 
-        //echo ' count = '.$count.' private = '.$private.' id = '.$id;
+        echo ' count = '.$count.' private = '.$private.' id = '.$id;
         $first = 1;
 
         $perpage = $config->getData()['perpage'];
@@ -102,6 +104,7 @@ class linkModel extends Model
         if($count % $perpage != 0 || $count == 0    ) {
             $last ++;
         }
+
         echo 'count = '.$count.'last = '.$last;
 
         if( isset($curpage) ) {
@@ -119,7 +122,13 @@ class linkModel extends Model
         $start = ($page - 1) * $perpage;
         $finish = $start + $perpage;
 
-        //echo 'start= '.$start.' finish = '.$finish;
+        if( $page < 1 || $page > $last ) {
+            echo'404';
+            http_response_code(404);
+            include('../Views/Access/my404.php');
+            die();
+        }
+        echo 'start= '.$start.' finish = '.$finish;
         $pags_info = ['page' => $page, 'first' => $first, 'last' => $last, 'prev' => $prev,
             'pprev' => $pprev, 'next' => $next, 'nnext' => $nnext, 'start' => $start,
             'finish' => $finish];
@@ -148,7 +157,7 @@ class linkModel extends Model
             $stmt = $db->query($sql, [$author_id, $title, $description, $link, $private]);
 
             //echo' '.$author_id.' '.$title.' '.$description.' '.$link.' '.$private;
-            header('location: http://testlinkshare.com/link/index/'.$author_id.'/1');
+            header('location:'.Config::getInstance()->getData()['main_page']);
         } else {
             $_SESSION['error'] = 'You already create this link!!!';
         }
@@ -176,7 +185,7 @@ class linkModel extends Model
             $stmt = $db->query($sql, [$title, $description, $link, $privacy, $link_id]);
 
             //echo ' '.$author_id.' ' . $link_id . ' ' . $title . ' ' . $description . ' ' . $link . ' ' . $privacy;
-            header('location: http://testlinkshare.com/link/index/'.$author_id.'/1');
+            header('location:'.Config::getInstance()->getData()['main_page']);
         } else {
             $_SESSION['error'] = 'You already create this link!!!';
         }
@@ -187,7 +196,7 @@ class linkModel extends Model
         $db = Database::getInstance();
         $sql = 'DELETE FROM links WHERE link_id =?';
         $stmt = $db->query($sql, [$id]);
-        header('location: http://testlinkshare.com/link/index/'.$user_id.'/1');
+        header('location:'.Config::getInstance()->getData()['main_page']);
     }
 
 
