@@ -4,3 +4,5 @@ Vagrantfile
 .vagrant/
 bootstrap-4.1.3 
 bootstrap-4.1.3.zip 
+ubuntu-xenial-16.04-cloudimg-console.log
+.gitignore.save
