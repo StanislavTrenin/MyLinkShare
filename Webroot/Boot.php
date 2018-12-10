@@ -25,7 +25,7 @@ class Boot
 
 
 
-    public function loadCore()
+    private function loadCore()
     {
         require_once '../Controllers/Controller.php';
 
@@ -39,7 +39,7 @@ class Boot
 
     }
 
-    public function loadPhPMailer()
+    private function loadPhPMailer()
     {
         require ('../vendor/phpmailer/phpmailer/src/PHPMailer.php');
         require ('../vendor/phpmailer/phpmailer/src/SMTP.php');
@@ -48,14 +48,14 @@ class Boot
 
 
 
-    public function loadDatabase()
+    private function loadDatabase()
     {
         require_once '../Config/Database.php';
         //$Database = Database::getInstance();
 
     }
 
-    public function loadConfig()
+    private function loadConfig()
     {
         require_once '../Config/Config.php';
         //$Config = new Config();
@@ -64,18 +64,28 @@ class Boot
     }
 
 
-    public function loadACL()
+    private function loadACL()
     {
         require_once 'ACL.php';
     }
 
-    public function loadView()
+    private function loadView()
     {
         require_once '../Views/View.php';
         require_once '../Views/Layout/default.php';
         //require_once '../Views/Layout/denied.php';
     }
 
+
+    public function loadAll()
+    {
+        $this->loadCore();
+        $this->loadConfig();
+        $this->loadDatabase();
+        $this->loadPhPMailer();
+        $this->loadACL();
+        $this->loadView();
+    }
 
 }
 ?>

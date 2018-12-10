@@ -23,6 +23,15 @@
 
     </script>
 
+    <script>
+        var error = document.getElementById('error');
+
+        if (error) {
+            // Please don't use native dialogs though!
+            alert(error.textConent)
+        }
+    </script>
+
 
     <script defer src="https://use.fontawesome.com/releases/v5.5.0/js/all.js" integrity="sha384-GqVMZRt5Gn7tB9D9q7ONtcp4gtHIUEW/yG7h98J7IpE3kpi+srfFyyB/04OV6pG0" crossorigin="anonymous"></script>
 
@@ -38,9 +47,6 @@
             padding: 3rem 1.5rem;
             text-align: center;
         }
-
-
-
 
 
     </style>

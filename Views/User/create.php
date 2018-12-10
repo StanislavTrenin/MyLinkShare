@@ -1,4 +1,14 @@
+
+
+
 <div align = "center">
+    <?php if (isset($_SESSION['error'])):  ?>
+        <div style="width: 600px;" class="alert alert-danger" role="alert">
+            <?php echo $_SESSION['error'];?>
+        </div>
+        <?php unset($_SESSION['error']); ?>
+    <?php endif; ?>
+
     <div style = "width:600px; border: solid 1px #333333; " align = "left">
         <div style = "background-color:#333333; color:#FFFFFF; padding:3px;">
             <?php if(ACL::get_role_id() == 3): ?>
@@ -8,6 +18,8 @@
                 <b>Registration</b>
             <?php endif; ?>
         </div>
+
+
 
         <div style = "margin:30px">
 

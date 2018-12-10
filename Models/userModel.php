@@ -39,10 +39,12 @@ class userModel extends Model
             if($correct_mail) {
                 if ($password_ok) {
 
+                    echo 'all right lets add new user!!!';
+                    echo 'login = '.$login.' mail = '.$mail.' password = '.$newpassword.' fname = '.$first_name.' sname = '.$second_name;
                     $sql = 'INSERT INTO users (login, mail, password, first_name,
- second_name, active) VALUES (?, ?, ?, ?, ?, ?)';
+ second_name, active, role_id) VALUES (?, ?, ?, ?, ?, ?, ?)';
                     $stmt = $db->query($sql, [$login, $mail, $newpassword,
-                        $first_name, $second_name, 0]);
+                        $first_name, $second_name, 0, 1]);
                     $sql = 'SELECT user_id FROM users WHERE login = ?';
                     $stmt = $db->query($sql, [$login]);
                     $id = $stmt->fetchColumn();
@@ -279,7 +281,7 @@ class userModel extends Model
         $db = Database::getInstance();
         $sql = 'DELETE FROM users WHERE user_id =?';
         $stmt = $db->query($sql, [$id]);
-        //header('location: http://testlinkshare.com/user/view/'.$myid);
+        header('location:'.Config::getInstance()->getData()['main_page']);
     }
 
 }

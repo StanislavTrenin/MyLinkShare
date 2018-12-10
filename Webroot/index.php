@@ -3,12 +3,8 @@
 
 require_once 'Boot.php';
 $boot = new Boot();
-$boot->loadCore();
-$boot->loadDatabase();
-$boot->loadPhPMailer();
-$boot->loadConfig();
-$boot->loadACL();
-$boot->loadView();
+$boot->loadAll();
+
 
 //global $config;
 

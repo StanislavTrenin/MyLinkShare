@@ -7,16 +7,17 @@ class Database
     private static $instance = null;
     private $conn;
 
-    private $host = 'localhost';
+    /*private $host = 'localhost';
     private $user = 'root';
     private $pass = '123';
-    private $name = 'link_db';
+    private $name = 'link_db';*/
 
     // The db connection is established in the private constructor.
     private function __construct()
     {
-        $this->conn = new PDO('mysql:host=localhost;dbname=link_db',
-            'root', '123');
+        $config = Config::getInstance();
+        $this->conn = new PDO('mysql:host='.$config->getData()['host'].';dbname='.$config->getData()['name'],
+            $config->getData()['user'], $config->getData()['pass']);
     }
 
     public static function getInstance()
