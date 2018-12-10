@@ -1,9 +1,10 @@
 <?php
 class link extends Controller
 {
-    function index($page)
+    function index()
     {
 
+        $page = $_GET['page'];
         if(isset($_SESSION['user_id'])) {
             $id = $_SESSION['user_id'];
         }
@@ -23,8 +24,10 @@ class link extends Controller
         return $view;
     }
 
-    function viewByUser($id, $page)
+    function viewByUser($id)
     {
+
+        $page = $_GET['page'];
         //id from params, rename
         $link_model = $this->model('linkModel');
 

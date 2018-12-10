@@ -1,4 +1,4 @@
-<div align="center" xmlns="http://www.w3.org/1999/html">
+<div align="center" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
     <div style = "width:600px; border: solid 1px #333333; " align = "left">
         <div style = "background-color:#333333; color:#FFFFFF; padding:3px;"><b>View links</b></div>
 
@@ -73,25 +73,33 @@
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
                     <?php if($pages['page'] != $pages['first']):?>
-                        <li class="page-item"><a class="page-link" href = "http://testlinkshare.com/link/<?php echo $method; ?><?php if($method == 'viewByUser'): echo '/'.$_SESSION['user_id']; endif;?>/<?php echo $pages['first']?>"><i class="fas fa-angle-double-left"></i></a></li>
+                        <li class="page-item">
+                            <a class="page-link" href = "http://testlinkshare.com/link/<?php echo $method; ?><?php if($method == 'viewByUser'): echo '/'.$_SESSION['user_id']; endif;?>/?page=<?php echo $pages['first']?>">
+                                <i class="fas fa-angle-double-left">
+
+                                </i>
+
+
+                            </a>
+                        </li>
                     <?php endif; ?>
                     <?php if($pages['page'] >= 3):?>
-                        <li class="page-item"><a class="page-link" href = "http://testlinkshare.com/link/<?php echo $method; ?><?php if($method == 'viewByUser'): echo '/'.$_SESSION['user_id']; endif;?>/<?php echo $pages['pprev']?>"><?php echo $pages['pprev']?></a></li>
+                        <li class="page-item"><a class="page-link" href = "http://testlinkshare.com/link/<?php echo $method; ?><?php if($method == 'viewByUser'): echo '/'.$_SESSION['user_id']; endif;?>/?page=<?php echo $pages['pprev']?>"><?php echo $pages['pprev']?></a></li>
                     <?php endif; ?>
                     <?php if($pages['page'] != $pages['first']):?>
-                        <li class="page-item"><a class="page-link" href = "http://testlinkshare.com/link/<?php echo $method; ?><?php if($method == 'viewByUser'): echo '/'.$_SESSION['user_id']; endif;?>/<?php echo $pages['prev']?>"><?php echo $pages['prev']?></a></li>
+                        <li class="page-item"><a class="page-link" href = "http://testlinkshare.com/link/<?php echo $method; ?><?php if($method == 'viewByUser'): echo '/'.$_SESSION['user_id']; endif;?>/?page=<?php echo $pages['prev']?>"><?php echo $pages['prev']?></a></li>
                     <?php endif; ?>
 
-                    <li class="page-item"><a class="page-link" href = "http://testlinkshare.com/link/<?php echo $method; ?><?php if($method == 'viewByUser'): echo '/'.$_SESSION['user_id']; endif;?>/<?php echo $pages['page']?>"><?php echo $pages['page']?></a></li>
+                    <li class="page-item"><a class="page-link" href = "http://testlinkshare.com/link/<?php echo $method; ?><?php if($method == 'viewByUser'): echo '/'.$_SESSION['user_id']; endif;?>/?page=<?php echo $pages['page']?>"><?php echo $pages['page']?></a></li>
 
                     <?php if($pages['page'] != $pages['last']):?>
-                        <li class="page-item"><a class="page-link" href = "http://testlinkshare.com/link/<?php echo $method; ?><?php if($method == 'viewByUser'): echo '/'.$_SESSION['user_id']; endif;?>/<?php echo $pages['next']?>"><?php echo $pages['next']?></a></li>
+                        <li class="page-item"><a class="page-link" href = "http://testlinkshare.com/link/<?php echo $method; ?><?php if($method == 'viewByUser'): echo '/'.$_SESSION['user_id']; endif;?>/?page=<?php echo $pages['next']?>"><?php echo $pages['next']?></a></li>
                     <?php endif; ?>
                     <?php if($pages['page'] <= $pages['last'] - 2):?>
-                        <li class="page-item"><a class="page-link" href = "http://testlinkshare.com/link/<?php echo $method; ?><?php if($method == 'viewByUser'): echo '/'.$_SESSION['user_id']; endif;?>/<?php echo $pages['nnext']?>"><?php echo $pages['nnext']?></a></li>
+                        <li class="page-item"><a class="page-link" href = "http://testlinkshare.com/link/<?php echo $method; ?><?php if($method == 'viewByUser'): echo '/'.$_SESSION['user_id']; endif;?>/?page=<?php echo $pages['nnext']?>"><?php echo $pages['nnext']?></a></li>
                     <?php endif; ?>
                     <?php if($pages['page'] != $pages['last']):?>
-                        <li class="page-item"><a class="page-link" href = "http://testlinkshare.com/link/<?php echo $method; ?><?php if($method == 'viewByUser'): echo '/'.$_SESSION['user_id']; endif;?>/<?php echo $pages['last']?>"><i class="fas fa-angle-double-right"></i></a></li>
+                        <li class="page-item"><a class="page-link" href = "http://testlinkshare.com/link/<?php echo $method; ?><?php if($method == 'viewByUser'): echo '/'.$_SESSION['user_id']; endif;?>/?page=<?php echo $pages['last']?>"><i class="fas fa-angle-double-right"></i></a></li>
                     <?php endif; ?>
                 </ul>
             </nav>

@@ -62,11 +62,11 @@
         <a href="http://testlinkshare.com/link/create/<?php echo $_SESSION['user_id']?>/" id="submit" class="nav-item nav-link"> <i class="far fa-file"></i> Create new link</a>
     <?php endif; ?>
 
-    <a href="http://testlinkshare.com/link/index/1" id="submit" class="nav-item nav-link"><i class="far fa-file-alt"></i> View links</a><br/><br/>
+    <a href="http://testlinkshare.com/link/index/?page=1" id="submit" class="nav-item nav-link"><i class="far fa-file-alt"></i> View links</a><br/><br/>
 
 
     <?php if (ACL::check(['class' => 'link', 'method' => 'viewByUser', 'params' => [$_SESSION['user_id'], 1]])):  ?>
-        <a href="http://testlinkshare.com/link/viewByUser/<?php echo $_SESSION['user_id']?>/1" id="submit" class="nav-item nav-link"><i class="fas fa-file-alt"></i> View you own links</a><br/><br/>
+        <a href="http://testlinkshare.com/link/viewByUser/<?php echo $_SESSION['user_id']?>/?page=1" id="submit" class="nav-item nav-link"><i class="fas fa-file-alt"></i> View you own links</a><br/><br/>
     <?php endif; ?>
 
     <?php if (ACL::check(['class' => 'user', 'method' => 'editSelf', 'params' => [$_SESSION['user_id'], 0]])):  ?>
