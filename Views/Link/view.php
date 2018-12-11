@@ -41,7 +41,7 @@
                                     <div class="btn-group mr-2" role="group" aria-label="Second group">
                                     <?php if ($_SESSION['user_id'] == $link['author_id'] || ACL::check(['class' => 'link', 'method' => 'delete', 'params' => [$link['link_id']]])): ?>
 
-                            <button class="btn btn-danger" data-toggle="modal" data-id="<?php echo $link['link_id'] ?>" data-target="#editModal<?php echo $link['link_id'] ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Delete</strong> </button>
+                            <button class="btn btn-danger" data-toggle="modal" data-id="<?php echo $link['link_id'] ?>" data-target="#editModal<?php echo $link['link_id'] ?>"><strong>Delete</strong> </button>
                             <div id="editModal<?php echo $link['link_id'] ?>" class="modal fade" role="dialog">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -107,6 +107,7 @@
             <?php endif;?>
 
         </div>
+
 
     </div>
 </div><br/><br/>

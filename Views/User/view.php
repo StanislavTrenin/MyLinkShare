@@ -36,7 +36,7 @@
                         <a href="http://testlinkshare.com/user/editSelf/<?php echo $user['user_id']?>"  id="submit" class="btn btn-primary">Edit</a>
                     </td>
                     <td>
-                        <button class="btn btn-danger" data-toggle="modal" data-id="<?php echo $user['user_id'] ?>" data-target="#editModal<?php echo $user['user_id'] ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Delete</strong> </button>
+                        <button class="btn btn-danger" data-toggle="modal" data-id="<?php echo $user['user_id'] ?>" data-target="#editModal<?php echo $user['user_id'] ?>"><strong>Delete</strong> </button>
                             <div id="editModal<?php echo $user['user_id'] ?>" class="modal fade" role="dialog">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
