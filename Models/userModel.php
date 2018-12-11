@@ -86,6 +86,7 @@ class userModel extends Model
                     }
 
 
+                    $_SESSION['success'] = 'You successfully create account! Confirmation link has been sent on you mail.';
                     //header('location: http://testlinkshare.com/user/index/');
                 } else {
                     $_SESSION['error'] = 'Fail to confirm password!!!';

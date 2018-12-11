@@ -7,28 +7,61 @@
             <?php if (isset($users)): ?>
                 <?php foreach($users as $user):?>
                 <form action = "" method = "post">
-                    <label>Login name  :</label><input type = "text" name = "login" class = "box" required value = "<?php echo $user['login']?>" readonly/><br /><br />
-                    <label>Mail address :</label><input type = "text" name = "mail" class = "box" required value = "<?php echo $user['mail']?>"/><br/><br />
-                    <label>Password  :</label><input type = "password" name = "password" class = "box" /><br/><br />
-                    <label>Confirm  :</label><input type = "password" name = "confirm" class = "box" /><br/><br />
-                    <label>First name  :</label><input type = "text" name = "first_name" class = "box" required value = "<?php echo $user['first_name']?>"/><br/><br />
-                    <label>Second name  :</label><input type = "text" name = "second_name" class = "box" required value = "<?php echo $user['second_name']?>"/><br/><br />
+                    <div class="form-group">
+                        <label for="login">Login name</label>
+                        <input id ="login" type = "text" name = "login" class = "form-control" aria-describedby="loginHelp" value = "<?php echo $user['login']?>" required readonly/>
+                        <small id="loginHelp" class="form-text text-muted">It will be shown for other users.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="mail">Mail address</label>
+                        <input id="mail" type = "text" name = "mail" class = "form-control" aria-describedby="mailHelp" value = "<?php echo $user['mail']?>" required/>
+                        <small id="mailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="pswd">Password</label>
+                        <input id="pswd" type = "password" name = "password" class = "form-control" aria-describedby="pswdHelp" placeholder="Password"/>
+                        <small id="pswdHelp" class="form-text text-muted">Never share your password with anyone else.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="cnf">Confirm</label>
+                        <input id="cnf" type = "password" name = "confirm" class = "form-control" aria-describedby="cnflHelp" placeholder="Password"/>
+                        <small id="cnfHelp" class="form-text text-muted">Please repeat your password once more.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="fname">First name</label>
+                        <input id="fname" type = "text" name = "first_name" class = "form-control" aria-describedby="fnameHelp" value = "<?php echo $user['first_name']?>" required/>
+                        <small id="fnameHelp" class="form-text text-muted">Only admins can see this.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="sname">Second name</label>
+                        <input id="sname" type = "text" name = "second_name" class = "form-control" aria-describedby="snameHelp" value = "<?php echo $user['second_name']?>" required/>
+                        <small id="snameHelp" class="form-text text-muted">Only admins can see this.</small>
+                    </div>
 
                     <?php if(ACL::check(['class' => 'user', 'method' => 'activate', 'params' => []])):?>
-                        <?php if(!$user['active']):?>
-                            <label>Active :</label><input type="checkbox" name="active"  /><br/><br />
-                        <?php endif; ?>
                         <?php if($user['active']):?>
-                            <label>Active :</label><input type="checkbox" name="active" checked='checked'/><br/><br />
+                            <div class="form-check">
+                                <input id="check" type="checkbox" name="active" class="form-check-input" checked/>
+                                <label for="check">Active</label>
+                            </div>
+                        <?php endif; ?>
+                        <?php if(!$user['active']):?>
+                            <div class="form-check">
+                                <input id="check" type="checkbox" name="active" class="form-check-input"/>
+                                <label for="check">Active</label>
+                            </div>
                         <?php endif; ?>
                     <?php endif; ?>
 
                     <?php if(ACL::check(['class' => 'user', 'method' => 'changeRole', 'params' => []])):?>
-                        <select name='role_id'>
-                            <option value='1' <?php if($user['role_id'] == 3): echo'selected = select'; endif;?>>User</option>
-                            <option value='2' <?php if($user['role_id'] == 2): echo'selected = select'; endif;?>>Editor</option>
-                            <option value='3' <?php if($user['role_id'] == 3): echo'selected = select'; endif;?>>Admin</option>
-                        </select><br/><br />
+                        <div class="form-group">
+                            <label for="role">Role</label>
+                            <select id="role" name='role_id' class="form-control">
+                                <option value='1' <?php if($user['role_id'] == 3): echo'selected = select'; endif;?>>User</option>
+                                <option value='2' <?php if($user['role_id'] == 2): echo'selected = select'; endif;?>>Editor</option>
+                                <option value='3' <?php if($user['role_id'] == 3): echo'selected = select'; endif;?>>Admin</option>
+                            </select>
+                    </div>
                     <?php endif; ?>
 
                     <?php endforeach; ?>
