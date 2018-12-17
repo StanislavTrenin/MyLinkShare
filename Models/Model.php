@@ -11,5 +11,15 @@ class Model
         //echo 'Previous_page = '.$_SERVER['HTTP_REFERER'];
 
     }
+
+    public function checkActivation($id)
+    {
+        $db = Database::getInstance();
+        $sql = 'SELECT active FROM users WHERE user_id = ?';
+        $stmt = $db->query($sql, [$id]);
+        $is_user_exist = $stmt->fetchColumn();
+
+        return $is_user_exist;
+    }
 }
 ?>
