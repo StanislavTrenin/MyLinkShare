@@ -50,7 +50,12 @@
 
 
 
+
+
     </style>
+
+
+
 </head>
 <body>
 <nav class="navbar fixed-top navbar-light bg-light">
@@ -100,8 +105,6 @@
     </div>
 
 </main>
-
-
 
 
 

@@ -13,7 +13,11 @@ class link extends Controller
         }
         //echo 'id = '.$id.' page = '.$page;
         $link_model = $this->model('linkModel');
-
+        if(isset($_POST['edit'])) {
+            echo' lets edit!';
+            $link_model->edit($_SESSION['user_id'], $_POST['link_id'], $_POST['title'], $_POST['description'],
+                $_POST['link'], $_POST['private']);
+        }
         $page_info = $link_model->definePages($id, $page, 0);
         //$last = round($count / $perpage) - 1;
 
@@ -31,6 +35,12 @@ class link extends Controller
         //id from params, rename
         $link_model = $this->model('linkModel');
 
+        if(isset($_POST['edit'])) {
+            echo' lets edit!';
+            $link_model->edit($_SESSION['user_id'], $_POST['link_id'], $_POST['title'], $_POST['description'],
+                $_POST['link'], $_POST['private']);
+        }
+
         $page_info = $link_model->definePages($id, $page, 1);
 
         $view = new View('../Views/Link/view.php',
@@ -42,8 +52,11 @@ class link extends Controller
     function viewLink($id)
     {
         $link_model = $this->model('linkModel');
-
-
+        if(isset($_POST['edit'])) {
+            echo' lets edit!';
+            $link_model->edit($_SESSION['user_id'], $_POST['link_id'], $_POST['title'], $_POST['description'],
+                $_POST['link'], $_POST['private']);
+        }
         $view = new View('../Views/Link/viewLink.php',
             ['links' => $link_model->viewLink($id)]);
 
