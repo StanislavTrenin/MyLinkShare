@@ -75,10 +75,11 @@
                     <?php if($pages['page'] != $pages['first']):?>
                         <li class="page-item">
                             <a class="page-link" href = "http://testlinkshare.com/link/<?php echo $method; ?><?php if($method == 'viewByUser'): echo '/'.$_SESSION['user_id']; endif;?>/?page=<?php echo $pages['first']?>">
-                                <i class="fas fa-angle-double-left">
+                                <div style="font-size: 15px;">
+                                <i class="fas fa-angle-double-left fa-lg">
 
                                 </i>
-
+                                </div>
 
                             </a>
                         </li>
@@ -99,7 +100,7 @@
                         <li class="page-item"><a class="page-link" href = "http://testlinkshare.com/link/<?php echo $method; ?><?php if($method == 'viewByUser'): echo '/'.$_SESSION['user_id']; endif;?>/?page=<?php echo $pages['nnext']?>"><?php echo $pages['nnext']?></a></li>
                     <?php endif; ?>
                     <?php if($pages['page'] != $pages['last']):?>
-                        <li class="page-item"><a class="page-link" href = "http://testlinkshare.com/link/<?php echo $method; ?><?php if($method == 'viewByUser'): echo '/'.$_SESSION['user_id']; endif;?>/?page=<?php echo $pages['last']?>"><i class="fas fa-angle-double-right"></i></a></li>
+                        <li class="page-item"><a class="page-link" href = "http://testlinkshare.com/link/<?php echo $method; ?><?php if($method == 'viewByUser'): echo '/'.$_SESSION['user_id']; endif;?>/?page=<?php echo $pages['last']?>"><div style="font-size: 15px;"><i class="fas fa-angle-double-right fa-lg"></i></div></a></li>
                     <?php endif; ?>
                 </ul>
             </nav>

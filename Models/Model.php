@@ -8,7 +8,7 @@ class Model
         //$this->database = $database;
 
         $_SESSION['previous_page'] = $_SERVER['HTTP_REFERER'];
-        echo 'Previous_page = '.$_SERVER['HTTP_REFERER'];
+        //echo 'Previous_page = '.$_SERVER['HTTP_REFERER'];
 
     }
 }

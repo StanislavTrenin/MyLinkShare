@@ -29,11 +29,11 @@ class Route
         $rez = ['class' => $class, 'method' => $method, 'params' => $params];
 
 
-        echo ' class = '.$class;
+        /*echo ' class = '.$class;
         echo ' method = '.$method;
         foreach ($params as $param) {
             echo ' params = ' . $param;
-        }
+        }*/
         return $rez;
     }
 

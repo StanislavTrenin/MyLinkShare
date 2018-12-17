@@ -11,14 +11,14 @@ class App
 
     public function run()
     {
-        echo'here';
+        //echo'here';
         $request = new Request();
 
         $route = new Route($request);
         $result = $route->route();
 
         if(ACL::check($result)){
-            echo 'yes';
+            //echo 'yes';
             return $this->call($result);
         } else {
             require_once '../Views/Access/denied.php';

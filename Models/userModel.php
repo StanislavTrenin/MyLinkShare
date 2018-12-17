@@ -110,6 +110,20 @@ class userModel extends Model
     function viewUser($id)
     {
         $db = Database::getInstance();
+
+        $sql = 'SELECT count(*) FROM users WHERE user_id = ?';
+        $stmt = $db->query($sql, [$id]);
+        $user_exist = $stmt->fetchColumn();
+
+
+        echo 'user exist  = '.$user_exist;
+        if( !$user_exist ) {
+            //echo'404';
+            http_response_code(404);
+            include('../Views/Access/my404.php');
+            die();
+        }
+
         $sql = 'SELECT * FROM users WHERE user_id = ?';
         $stmt = $db->query($sql, [$id]);
 

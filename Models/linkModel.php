@@ -5,7 +5,7 @@ class linkModel extends Model
     {
         $rez = array();
         $db = Database::getInstance();
-        $sql = 'SELECT * FROM links';
+        $sql = 'SELECT * FROM links ORDER BY link_id DESC';
         $stmt = $db->query($sql, []);
 
         $index = 0;
@@ -35,7 +35,7 @@ class linkModel extends Model
     {
         $rez = array();
         $db = Database::getInstance();
-        $sql = 'SELECT * FROM links WHERE author_id = ?';
+        $sql = 'SELECT * FROM links WHERE author_id = ?  ORDER BY link_id DESC';
         $stmt = $db->query($sql, [$id]);
 
         $index = 0;
@@ -58,8 +58,22 @@ class linkModel extends Model
     function viewLink($id)
     {
         $db = Database::getInstance();
+
+        $sql = 'SELECT count(*) FROM links WHERE link_id = ?';
+        $stmt = $db->query($sql, [$id]);
+        $link_exist = $stmt->fetchColumn();
+
+
+        if( !$link_exist ) {
+            //echo'404';
+            http_response_code(404);
+            include('../Views/Access/my404.php');
+            die();
+        }
+
         $sql = 'SELECT * FROM links WHERE link_id = ?';
         $stmt = $db->query($sql, [$id]);
+
 
         return $stmt;
     }
@@ -67,7 +81,7 @@ class linkModel extends Model
     function definePages($id, $curpage, $all)
     {
 
-        echo 'there!!!';
+        //echo 'there!!!';
         $db = Database::getInstance();
         $config = Config::getInstance();
 
@@ -78,13 +92,13 @@ class linkModel extends Model
             $sql = 'SELECT count(*) FROM links WHERE author_id = ?';
             $stmt = $db->query($sql, [$id]);
         }
-        echo 'there!!!';
+        //echo 'there!!!';
 
         $count = $stmt->fetchColumn();
         //echo ' count = ' . $count;
 
         if($all == 0 && !ACL::check_any(ACL::get_role_id(), ['class' => 'link', 'method' => 'viewPrivate', 'params' => []])) {
-            echo 'remove private for '.$id;
+            //echo 'remove private for '.$id;
                 $sql = 'SELECT count(*) FROM links WHERE author_id != ? AND privacy = ?';
 
             $stmt = $db->query($sql, [$id, 1]);
@@ -92,20 +106,20 @@ class linkModel extends Model
 
             $count -= $private;
         }
-        echo 'there!!!';
+        //echo 'there!!!';
 
-        echo ' count = '.$count.' private = '.$private.' id = '.$id;
+        //echo ' count = '.$count.' private = '.$private.' id = '.$id;
         $first = 1;
 
         $perpage = $config->getData()['perpage'];
-        echo ' lol = '.$perpage;
+        //echo ' lol = '.$perpage;
         $last = intdiv($count , $perpage);
 
         if($count % $perpage != 0 || $count == 0    ) {
             $last ++;
         }
 
-        echo 'count = '.$count.'last = '.$last;
+        //echo 'count = '.$count.'last = '.$last;
 
         if( isset($curpage) ) {
             $page = $curpage;
@@ -123,12 +137,12 @@ class linkModel extends Model
         $finish = $start + $perpage;
 
         if( $page < 1 || $page > $last ) {
-            echo'404';
+            //echo'404';
             http_response_code(404);
             include('../Views/Access/my404.php');
             die();
         }
-        echo 'start= '.$start.' finish = '.$finish;
+        //echo 'start= '.$start.' finish = '.$finish;
         $pags_info = ['page' => $page, 'first' => $first, 'last' => $last, 'prev' => $prev,
             'pprev' => $pprev, 'next' => $next, 'nnext' => $nnext, 'start' => $start,
             'finish' => $finish];
@@ -173,6 +187,8 @@ class linkModel extends Model
         } else {
             $privacy = 0;
         }
+
+
 
 
         $sql = 'SELECT count(*) FROM links WHERE author_id = ? AND link = ? AND link_id != ?';
