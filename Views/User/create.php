@@ -21,7 +21,7 @@
         <?php unset($_SESSION['success']); ?>
     <?php endif; ?>
 
-    <div style = "width:600px; border: solid 1px #333333; " align = "left">
+    <div style = "width:1000px; border: solid 1px #333333; " align = "left">
         <div style = "background-color:#333333; color:#FFFFFF; padding:3px;">
             <?php if(ACL::get_role_id() == 3): ?>
                 <b>Create user</b>
