@@ -7,7 +7,7 @@ class Controller
 
         $model = $this->model('Model');
         if(isset($_SESSION['user_id'])) {
-            echo 'here construct ' . $model->checkActivation($_SESSION['user_id']);
+            //echo 'here construct ' . $model->checkActivation($_SESSION['user_id']);
             if(!$model->checkActivation($_SESSION['user_id']))
             {
 

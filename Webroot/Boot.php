@@ -81,7 +81,6 @@ class Boot
         //require_once '../Views/Layout/denied.php';
     }
 
-
     public function loadAll()
     {
         $this->loadCore();
@@ -90,6 +89,7 @@ class Boot
         $this->loadPhPMailer();
         $this->loadACL();
         $this->loadView();
+        //$this->loadJS();
     }
 
 }
