@@ -2,6 +2,45 @@ function msg(){
     alert("Hello world from JS!!!");
 }
 
+function openEdit(str) {
+    //alert("Lets change "+id +"'st link!");
+    if (str.length == 0) {
+        document.getElementById("txtHint").innerHTML = "";
+        return;
+    } else {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("txtHint").innerHTML = this.responseText;
+            }
+        };
+        xmlhttp.open("GET", "http://testlinkshare.com/link/edit/" + str, true);
+        xmlhttp.send();
+    }
+    
+}
+
+
+function editLink(str) {
+    if (str.length == 0) {
+        document.getElementById("txtHint").innerHTML = "";
+        return;
+    } else {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("txtHint").innerHTML = this.responseText;
+            }
+        };
+        xmlhttp.open("GET", "http://testlinkshare.com/link/edit/" + str, true);
+        xmlhttp.send();
+    }
+
+
+
+
+}
+
 /*$('#submit').click(function(){
 
     alert('submitting');

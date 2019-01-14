@@ -43,7 +43,7 @@
                     <?php endif; ?>
 
 
-                    <input type = "submit" name = "edit" class="btn btn-primary" value = " Edit "/>
+                    <input type = "submit" name = "edit" class="btn btn-primary" value = " Edit " onclick="editLink(<?php echo $link['link_id']?>)"/>
             </form>
 
                 <?php endforeach; ?>

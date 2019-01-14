@@ -38,43 +38,9 @@
 
                                         <?php if ($_SESSION['user_id'] == $link['author_id'] || ACL::check(['class' => 'link', 'method' => 'edit', 'params' => [$link['link_id']]])): ?>
 
-                                            <button class="collapsible">Edit link</button>
-                                            <div class="content">
-                                                <p>
-                                                    <form id='edit' action = "" method = "post">
 
-                                                        <input id="link_id" type = "hidden" name = "link_id" class="form-control" value = "<?php echo $link['link_id']?>" required/>
-
-                                                        <div class="form-group">
-                                                            <label for="title">Title</label>
-                                                            <input id="title" type = "text" name = "title" class="form-control" value = "<?php echo $link['title']?>" required/>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="text">Description</label>
-                                                                <p><textarea id="text" rows="10" class="form-control" name="description" required><?php echo $link['description']?></textarea></p>
-                                                         </div>
-                                                        <div class="form-group">
-                                                            <label for="link">Link</label>
-                                                            <input id="link" type = "text" name = "link" class="form-control" value = "<?php echo $link['link']?>" required/>
-                                                        </div>
-                                                        <?php if($link['privacy']):?>
-                                                            <div class="form-check">
-                                                                <input id="check" type="checkbox" name="private" class="form-check-input" checked/>
-                                                                <label for="check">Private</label>
-                                                            </div>
-                                                        <?php endif; ?>
-                                                        <?php if(!$link['privacy']):?>
-                                                            <div class="form-check">
-                                                                <input id="check" type="checkbox" name="private" class="form-check-input"/>
-                                                                <label for="check">Private</label>
-                                                            </div>
-                                                        <?php endif; ?>
-
-                                                        <input type = "submit" name = "edit" class="btn btn-primary" value = " Edit "/>
-                                                    </form>
-                                                </p>
-                                            </div>
-
+                                <button class="btn btn-primary" value="click" onclick="openEdit(<?php echo $link['link_id']?>)"><strong>Edit</strong></button><br/>
+                                            <span id="txtHint"></span>
                                         <?php endif; ?>
 
                                         <?php if ($_SESSION['user_id'] == $link['author_id'] || ACL::check(['class' => 'link', 'method' => 'delete', 'params' => [$link['link_id']]])): ?>
