@@ -37,10 +37,8 @@
                                 <?php echo $link['link']?><br/>
 
                                         <?php if ($_SESSION['user_id'] == $link['author_id'] || ACL::check(['class' => 'link', 'method' => 'edit', 'params' => [$link['link_id']]])): ?>
-
-
-                                <button class="btn btn-primary" value="click" onclick="openEdit(<?php echo $link['link_id']?>)"><strong>Edit</strong></button><br/>
-                                            <span id="txtHint"></span>
+                                                <button class="btn btn-primary" value="click"  onclick="openEdit(<?php echo $link['link_id']?>)"><strong>Edit</strong></button><br/>
+                                                <div id="txtHint<?php echo $link['link_id']?>"><b>Person info will be listed here...</b></div>
                                         <?php endif; ?>
 
                                         <?php if ($_SESSION['user_id'] == $link['author_id'] || ACL::check(['class' => 'link', 'method' => 'delete', 'params' => [$link['link_id']]])): ?>

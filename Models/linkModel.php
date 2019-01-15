@@ -202,8 +202,8 @@ class linkModel extends Model
             $sql = 'UPDATE links SET title = ?, description = ?, link = ?, privacy = ? WHERE link_id = ?';
             $stmt = $db->query($sql, [$title, $description, $link, $privacy, $link_id]);
             echo ' there in edit! ';
-            //echo ' '.$author_id.' ' . $link_id . ' ' . $title . ' ' . $description . ' ' . $link . ' ' . $privacy;
-            header('location:'.Config::getInstance()->getData()['main_page']);
+            echo ' '.$author_id.' ' . $link_id . ' ' . $title . ' ' . $description . ' ' . $link . ' ' . $privacy;
+            //header('location:'.Config::getInstance()->getData()['main_page']);
         } else {
             $_SESSION['error'] = 'You already create this link!!!';
         }

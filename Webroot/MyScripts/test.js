@@ -1,17 +1,20 @@
-function msg(){
-    alert("Hello world from JS!!!");
+function msg() {
+
+    alert('lol');
 }
 
+
+
 function openEdit(str) {
-    //alert("Lets change "+id +"'st link!");
+    //alert('txtHint'+str);
     if (str.length == 0) {
-        document.getElementById("txtHint").innerHTML = "";
+        document.getElementById("txtHint"+str).innerHTML = "";
         return;
     } else {
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("txtHint").innerHTML = this.responseText;
+                document.getElementById("txtHint"+str).innerHTML = this.responseText;
             }
         };
         xmlhttp.open("GET", "http://testlinkshare.com/link/edit/" + str, true);
@@ -22,20 +25,30 @@ function openEdit(str) {
 
 
 function editLink(str) {
-    if (str.length == 0) {
-        document.getElementById("txtHint").innerHTML = "";
-        return;
-    } else {
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("txtHint").innerHTML = this.responseText;
-            }
-        };
-        xmlhttp.open("GET", "http://testlinkshare.com/link/edit/" + str, true);
-        xmlhttp.send();
-    }
 
+    var title = document.getElementById('title').value;
+    var text = document.getElementById('text').value;
+    var link = document.getElementById('link').value;
+    var check = document.getElementById('check').value;
+    var dataString = 'edit=1&title='+title+'&description='+text+'&link='+link+'&private='+check;
+
+    //alert(title+' '+text+' '+link+' '+check);
+
+
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("POST", "http://testlinkshare.com/link/edit/" + str, false);
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+    xmlhttp.onreadystatechange = function() {
+        if(xmlhttp.readyState == XMLHttpRequest.DONE && xmlhttp.status == 200) {
+            document.getElementById("txtHint"+str).innerHTML = this.responseText;
+        }
+    };
+
+
+    xmlhttp.send(dataString);
+
+    alert(dataString);
 
 
 

@@ -82,12 +82,20 @@ class link extends Controller
     {
         $link_model = $this->model('linkModel');
 
+
         if(isset($_POST['edit'])) {
+            echo $id.' '.$_POST['title'].' '.$_POST['description'].' '.$_POST['link'].' '.$_POST['private'];
             $link_model->edit($_SESSION['user_id'], $id, $_POST['title'], $_POST['description'],
-                $_POST['link'], $_POST['private']);
+                $_POST['link'], true);
         }
         $view = new View('../Views/Link/edit.php', ['links' => $link_model->viewLink($id)]);
         return $view;
+    }
+
+    function test($id)
+    {
+        echo 'here!!!';
+        echo $id.' '.$_POST['title'].' '.$_POST['description'].' '.$_POST['link'].' '.$_POST['private'];
     }
 
     function delete($id)
