@@ -178,17 +178,19 @@ class linkModel extends Model
 
     }
 
-    function edit($author_id, $link_id, $title, $description, $link, $private)
+    function edit($author_id, $link_id, $title, $description, $link, $privacy)
     {
         $q = $_REQUEST["q"];
         echo $q;
         $db = Database::getInstance();
 
-        if((bool)$private) {
+        /*if((bool)$private) {
             $privacy = 1;
         } else {
             $privacy = 0;
-        }
+        }*/
+
+
 
 
 
@@ -203,6 +205,7 @@ class linkModel extends Model
             $stmt = $db->query($sql, [$title, $description, $link, $privacy, $link_id]);
             echo ' there in edit! ';
             echo ' '.$author_id.' ' . $link_id . ' ' . $title . ' ' . $description . ' ' . $link . ' ' . $privacy;
+
             //header('location:'.Config::getInstance()->getData()['main_page']);
         } else {
             $_SESSION['error'] = 'You already create this link!!!';

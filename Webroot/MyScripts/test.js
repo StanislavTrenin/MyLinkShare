@@ -1,58 +1,73 @@
-function msg() {
-
-    alert('lol');
-}
-
-
 
 function openEdit(str) {
-    //alert('txtHint'+str);
-    if (str.length == 0) {
-        document.getElementById("txtHint"+str).innerHTML = "";
-        return;
+
+    var x = document.getElementById("myDIV"+str);
+    if (x.style.display === "none") {
+        x.style.display = "block";
     } else {
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("txtHint"+str).innerHTML = this.responseText;
-            }
-        };
-        xmlhttp.open("GET", "http://testlinkshare.com/link/edit/" + str, true);
-        xmlhttp.send();
+        x.style.display = "none";
     }
-    
+
 }
 
 
-function editLink(str) {
+function getCheckboxValue(inputElements) {
+    var check;
+    for(var i=0; inputElements[i]; ++i){
+        if(inputElements[i].checked){
+            check = inputElements[i].value;
+            break;
+        }
+    }
 
-    var title = document.getElementById('title').value;
-    var text = document.getElementById('text').value;
-    var link = document.getElementById('link').value;
-    var check = document.getElementById('check').value;
-    var dataString = 'edit=1&title='+title+'&description='+text+'&link='+link+'&private='+check;
+    if(check == null)
+    {
+        return 0;
+    } else {
+        return 1;
+    }
 
-    //alert(title+' '+text+' '+link+' '+check);
 
+}
 
+function sendAjax(url, data, id) {
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("POST", "http://testlinkshare.com/link/edit/" + str, false);
+    xmlhttp.open("POST", url, false);
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
     xmlhttp.onreadystatechange = function() {
         if(xmlhttp.readyState == XMLHttpRequest.DONE && xmlhttp.status == 200) {
-            document.getElementById("txtHint"+str).innerHTML = this.responseText;
+            document.getElementById(id).innerHTML = this.responseText;
         }
     };
 
 
-    xmlhttp.send(dataString);
-
-    alert(dataString);
-
-
+    xmlhttp.send(data);
 
 }
+
+function editLink(str) {
+
+    var check;
+    var title = document.getElementById('title'+str).value;
+    var text = document.getElementById('text'+str).value;
+    var link = document.getElementById('link'+str).value;
+
+    var inputElements = document.getElementsByClassName('form-check-input'+str);
+    check = getCheckboxValue(inputElements);
+
+    var dataString = 'edit=1&title='+title+'&description='+text+'&link='+link+'&private='+check;
+
+
+
+    sendAjax('http://testlinkshare.com/link/edit/' + str, dataString, 'txtHint'+str);
+
+    sendAjax(document.URL, null, 'total');
+
+}
+
+
+
 
 /*$('#submit').click(function(){
 

@@ -86,10 +86,10 @@ class link extends Controller
         if(isset($_POST['edit'])) {
             echo $id.' '.$_POST['title'].' '.$_POST['description'].' '.$_POST['link'].' '.$_POST['private'];
             $link_model->edit($_SESSION['user_id'], $id, $_POST['title'], $_POST['description'],
-                $_POST['link'], true);
+                $_POST['link'], $_POST['private']);
         }
-        $view = new View('../Views/Link/edit.php', ['links' => $link_model->viewLink($id)]);
-        return $view;
+        //$view = new View('../Views/Link/edit.php', ['links' => $link_model->viewLink($id)]);
+        //return $view;
     }
 
     function test($id)
