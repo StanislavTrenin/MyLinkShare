@@ -178,17 +178,17 @@ class linkModel extends Model
 
     }
 
-    function edit($author_id, $link_id, $title, $description, $link, $privacy)
+    function edit($author_id, $link_id, $title, $description, $link, $private)
     {
         $q = $_REQUEST["q"];
         echo $q;
         $db = Database::getInstance();
 
-        /*if((bool)$private) {
+        if($private == 'on') {
             $privacy = 1;
         } else {
             $privacy = 0;
-        }*/
+        }
 
 
 

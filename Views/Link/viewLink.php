@@ -61,16 +61,16 @@
                             <?php endif; ?>
                         <?php endif; ?>
 
-                        <h4><?php echo $link['title']?></h4>
-                        <?php echo $link['description']?><br/>
-                        <?php echo $link['link']?><br/>
+                        <h4 id="title<?php echo $link['link_id']?>"><?php echo $link['title']?></h4>
+                        <p id="description<?php echo $link['link_id']?>"><?php echo $link['description']?></p><br/>
+                        <p id="link<?php echo $link['link_id']?>"><?php echo $link['link']?></p><br/>
 
 
                         <?php if ($_SESSION['user_id'] == $link['author_id'] || ACL::check(['class' => 'link', 'method' => 'edit', 'params' => [$link['link_id']]])): ?>
-                            <button class="btn btn-primary" value="click"  onclick="openEdit(<?php echo $link['link_id']?>)"><strong>Edit</strong></button><br/>
-                            <div id="myDIV<?php echo $link['link_id']?>" style="display: none;">
-
-                                <form action = "" method = "post">
+                            <button class="btn btn-primary" value="click">Edit</button>
+                            <div class="hidden" id="hidden<?php echo $link['link_id']?>" style="display: none;">
+                                <br/>
+                                <form action = "" method = "post" id = "form<?php echo $link['link_id']?>">
                                     <div class="form-group">
                                         <label for="title">Title</label>
                                         <input id="title<?php echo $link['link_id']?>" type = "text" name = "title" class="form-control" value = "<?php echo $link['title']?>" required/>
@@ -95,15 +95,14 @@
                                             <label for="check">Private</label>
                                         </div>
                                     <?php endif; ?>
-
-
-                                    <input type = "button" name = "edit" class="btn btn-primary" value = " Submit " onclick="editLink(<?php echo $link['link_id']?>)"/>
+                                    <input type = "button" name = "edit_confirm" class="btn btn-primary" value = " Submit " id = "submit<?php echo $link['link_id']?>"/>
                                 </form>
                             </div>
                         <?php endif; ?>
+                    <br/><br/>
                         <?php if ($_SESSION['user_id'] == $link['author_id'] || ACL::check(['class' => 'link', 'method' => 'delete', 'params' => [$link['link_id']]])): ?>
 
-                            <br/><button class="btn btn-danger" data-toggle="modal" data-id="<?php echo $link['link_id'] ?>" data-target="#editModal<?php echo $link['link_id'] ?>"><strong>Delete</strong> </button>
+                            <button class="btn btn-danger" data-toggle="modal" data-id="<?php echo $link['link_id'] ?>" data-target="#editModal<?php echo $link['link_id'] ?>"><strong>Delete</strong> </button>
                             <div id="editModal<?php echo $link['link_id'] ?>" class="modal fade" role="dialog">
                                 <div class="modal-dialog">
                                     <div class="modal-content">

@@ -1,7 +1,7 @@
 
-function openEdit(str) {
+function collapseElement(name, id) {
 
-    var x = document.getElementById("myDIV"+str);
+   const x = document.getElementById(name+id);
     if (x.style.display === "none") {
         x.style.display = "block";
     } else {
@@ -10,9 +10,60 @@ function openEdit(str) {
 
 }
 
+$('button').click(function(){
+    let isHidden = false
+    if ( $(this).next().css('display') == 'none' || $($(this).next()).css("visibility") == "hidden"){
+        isHidden = true;
+    }
+    $('.hidden').hide('slow');
+    if(isHidden){
+
+        $(this).next().toggle('slow');
+    }
+
+});
+
+$("input").click(function(e){
+
+    if(e.target.name == 'edit_confirm') {
+        const id = e.target.id;
+        const number = id.replace('submit', '');
+        let arguments = $('#form' + number).serialize() + '&edit=1';
+
+        if(!($("#check"+number+":checked").length > 0)){
+            arguments += '&private=off';
+        }
+
+        let x = $('#form' + number).serializeArray();
+        /*$.each(x, function(i, field) {
+
+            alert(field.name+":"+field.value);
+        });
+        alert(x[0]);*/
+        $.ajax({
+            type: 'POST',
+            //dataType: "json",
+            url: 'http://testlinkshare.com/link/edit/'+number+'/',
+            data: arguments,
+            success: function() {
+
+            }
+        });
+
+
+
+        $('#title'+number).text(x[0].value);
+        $('#description'+number).text(x[1].value);
+        $('#link'+number).text(x[2].value);
+
+        $('#hidden'+number).toggle('slow');
+    }
+});
+
+
 
 function getCheckboxValue(inputElements) {
-    var check;
+    let check;
     for(var i=0; inputElements[i]; ++i){
         if(inputElements[i].checked){
             check = inputElements[i].value;
@@ -31,38 +82,45 @@ function getCheckboxValue(inputElements) {
 }
 
 function sendAjax(url, data, id) {
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("POST", url, false);
-    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    if (id.length = 0){
+        document.getElementById(id).innerHTML = "";
+        return;
+    } else {
+        const xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("POST", url, false);
+        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
-    xmlhttp.onreadystatechange = function() {
-        if(xmlhttp.readyState == XMLHttpRequest.DONE && xmlhttp.status == 200) {
-            document.getElementById(id).innerHTML = this.responseText;
-        }
-    };
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == XMLHttpRequest.DONE && xmlhttp.status == 200) {
+
+                    document.getElementById(id).innerHTML = this.responseText;
+
+            }
+        };
 
 
-    xmlhttp.send(data);
-
+        xmlhttp.send(data);
+    }
 }
 
 function editLink(str) {
 
-    var check;
-    var title = document.getElementById('title'+str).value;
-    var text = document.getElementById('text'+str).value;
-    var link = document.getElementById('link'+str).value;
+    const title = document.getElementById('title'+str).value;
+    const text = document.getElementById('text'+str).value;
+    const link = document.getElementById('link'+str).value;
 
-    var inputElements = document.getElementsByClassName('form-check-input'+str);
-    check = getCheckboxValue(inputElements);
+    const inputElements = document.getElementsByClassName('form-check-input'+str);
+    const check = getCheckboxValue(inputElements);
 
-    var dataString = 'edit=1&title='+title+'&description='+text+'&link='+link+'&private='+check;
+    const dataString = 'edit=1&title='+title+'&description='+text+'&link='+link+'&private='+check;
 
 
 
     sendAjax('http://testlinkshare.com/link/edit/' + str, dataString, 'txtHint'+str);
 
-    sendAjax(document.URL, null, 'total');
+    //sendAjax(document.URL, '', 'total');
+
+    //alert('lol');
 
 }
 

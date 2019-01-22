@@ -80,8 +80,9 @@ class link extends Controller
 
     function edit($id)
     {
+        //echo "I get param1 = ".$_POST['param1']." and param2 = ".$_POST['param2'];
         $link_model = $this->model('linkModel');
-
+echo'here';
 
         if(isset($_POST['edit'])) {
             echo $id.' '.$_POST['title'].' '.$_POST['description'].' '.$_POST['link'].' '.$_POST['private'];
